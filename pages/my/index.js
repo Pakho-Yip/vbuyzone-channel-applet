@@ -16,10 +16,10 @@ Page({
   data: {
     identityAuthState: '',
     truckAuthState: '',
-    haveSignedAgreement:'',
+    haveSignedAgreement: '',
     name: "司机名",
-    loginStatus:false,
-    confState:true
+    loginStatus: false,
+    confState: true
   },
   onLoad: function (options) {
     // wxRequestCode().then(code => {
@@ -37,48 +37,48 @@ Page({
         let haveSignedAgreement = res.haveSignedAgreement;
         this.setData({
           name: driverName,
-          identityAuthState:identityAuthState,
-          truckAuthState:truckAuthState,
-          haveSignedAgreement:haveSignedAgreement
+          identityAuthState: identityAuthState,
+          truckAuthState: truckAuthState,
+          haveSignedAgreement: haveSignedAgreement
         })
-      } 
+      }
     })
   },
 
 
 
-  desensitization(str, beginLen, endLen){
+  desensitization(str, beginLen, endLen) {
     var len = str.length;
     var firstStr = str.substr(0, beginLen);
     var lastStr = str.substr(endLen);
-    var middleStr = str.substring(beginLen, len-Math.abs(endLen)).replace(/[\s\S]/ig, '****');
-    let tempStr = firstStr+middleStr+lastStr;
+    var middleStr = str.substring(beginLen, len - Math.abs(endLen)).replace(/[\s\S]/ig, '****');
+    let tempStr = firstStr + middleStr + lastStr;
     return tempStr;
   },
-  refreshData(){
-    http.post(Url.common.refreshData,'').then(res => {
+  refreshData() {
+    http.post(Url.common.refreshData, '').then(res => {
       if (res) {
         let driverName = res.driverName || '司机名';
         let identityAuthState = res.identityAuthState;
         let truckAuthState = res.truckAuthState;
         let haveSignedAgreement = res.haveSignedAgreement;
         wx.setStorageSync('mobile', res.mobile)
-        let showMobile = this.desensitization(res.mobile,3,7);
+        let showMobile = this.desensitization(res.mobile, 3, 7);
         this.setData({
           name: driverName,
-          mobile:showMobile ,
-          identityAuthState:identityAuthState,
-          truckAuthState:truckAuthState,
-          haveSignedAgreement:haveSignedAgreement
+          mobile: showMobile,
+          identityAuthState: identityAuthState,
+          truckAuthState: truckAuthState,
+          haveSignedAgreement: haveSignedAgreement
         })
         this.creCheck();
-      } 
+      }
     })
   },
-  handleLogin(){
+  handleLogin() {
     wx.navigateTo({
       url: '/pages/login/index',
-		})
+    })
 
 
     // let that = this;
@@ -119,7 +119,7 @@ Page({
     //     //that.handleLogin();
     //   })
     // })
-   
+
   },
   getOssInfo() {
     http.get(Url.common.oss, null).then(res => {
@@ -134,13 +134,13 @@ Page({
   onShow: function () {
     let that = this;
     this.getWxVersion();
-    if(!wx.getStorageSync('tokenId')){  
+    if (!wx.getStorageSync('tokenId')) {
       that.setData({
-        loginStatus:false
+        loginStatus: false
       })
       wx.showModal({
         title: '提示',
-        content: '司机相关信息需要登录后才可查看，是否马上登录？',
+        content: '相关信息需要登录后才可查看，是否马上登录？',
         success(res) {
           if (res.confirm) {
             that.handleLogin();
@@ -151,49 +151,31 @@ Page({
       return;
     }
     this.setData({
-      loginStatus:true
+      loginStatus: true
     })
     this.getInfo();
-    this.refreshData();  
+    this.refreshData();
   },
-  getWxVersion(){
-      http.get(Url.common.conf,'').then(res => {
-         let confValue = res && res.confValue;
-         if(confValue){
-          if(confValue == '1.0.3'){
-            this.setData({
-              confState:true
-            })
-            app.globalData.confState = true;
-           } else {
-            this.setData({
-              confState:false
-            })
-            app.globalData.confState = false;
-           }
-         }
-      })
-  },
-  handleTel() {
-    wx.showModal({
-      title: '提示',
-      content: '确认拨打:0572 6058335!',
-      success(res) {
-        if (res.confirm) {
-          wx.makePhoneCall({
-            phoneNumber: '0572 6058335'
+  getWxVersion() {
+    http.get(Url.common.conf, '').then(res => {
+      let confValue = res && res.confValue;
+      if (confValue) {
+        if (confValue == '1.0.3') {
+          this.setData({
+            confState: true
           })
+          app.globalData.confState = true;
         } else {
-          console.log('点击取消')
+          this.setData({
+            confState: false
+          })
+          app.globalData.confState = false;
         }
       }
     })
   },
-  handleInfo() {
-    wxNavigateTo("../basic/tcinfo/index");
-  },
   onPullDownRefresh: function () {
-    if(!wx.getStorageSync('tokenId')){ 
+    if (!wx.getStorageSync('tokenId')) {
       wx.stopPullDownRefresh();
       return;
     }
@@ -202,12 +184,6 @@ Page({
     this.getWxVersion();
     //this.creCheck();
   },
-  toagreement(){
-    wxNavigateTo("../agreementList/index");
-  },
-  getBank(){
-    wxNavigateTo("../bankList/index");
-  },
   handleOut() {
     http.post(Url.login.out).then(_ => {
       wx.clearStorage()
@@ -215,7 +191,7 @@ Page({
         title: '退出成功'
       })
       this.setData({
-        loginStatus:false
+        loginStatus: false
       })
       wxRequestCode().then(code => {
         console.log(code);
@@ -230,13 +206,13 @@ Page({
         title: '退出成功'
       })
       this.setData({
-        loginStatus:false
+        loginStatus: false
       })
       //wxReLaunch("../my/index")
     })
   },
   creCheck() {
-    if(this.data.confState){
+    if (this.data.confState) {
       return
     }
     if (this.data.identityAuthState == 'UNAUTH') {
@@ -244,16 +220,16 @@ Page({
       return;
     };
     http.post(Url.login.creCheck).then(res => {
-      if (!res.licensePicCheck || !res.truckCheck || !res.bankCardCheck || !res.negativeIdentityPicCheck){
+      if (!res.licensePicCheck || !res.truckCheck || !res.bankCardCheck || !res.negativeIdentityPicCheck) {
         let nowGetDate = new Date().getDate().toString(); //得到日期
-        if(wx.getStorageSync("credentialsCheckDate")){
+        if (wx.getStorageSync("credentialsCheckDate")) {
           if (nowGetDate != wx.getStorageSync("credentialsCheckDate")) {
-						wx.setStorageSync("credentialsCheckDate", nowGetDate)
+            wx.setStorageSync("credentialsCheckDate", nowGetDate)
             wxNavigateTo("../supplementary/index");
-					} else {
-						console.log('同一天提醒一次')
-					}
-        }else{
+          } else {
+            console.log('同一天提醒一次')
+          }
+        } else {
           wx.setStorageSync("credentialsCheckDate", nowGetDate)
           wxNavigateTo("../supplementary/index");
         }

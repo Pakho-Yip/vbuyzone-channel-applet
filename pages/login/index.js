@@ -20,28 +20,28 @@ Page({
    */
   onLoad: function (options) {
 
-      wx.getSystemInfo({
-        success: function (res) {
-            let version = res.SDKVersion;
-            version = version.replace(/\./g, "");
-            console.log('当前版本号: '+version);
-        }
-      });
-      
-      wxRequestCode().then(code => {
-        console.log(code);
-        var code = code;
-        app.globalData.jscode = code;
-      })
-      // wx.login({
-      //   success: res => {
-      //     // resolve(res.code)
-      //     // resolve(res.code)
-      //     console.log(res);
-      //     var code = res.code;
-      //     app.globalData.jscode = code;
-      //   }
-      // })
+    wx.getSystemInfo({
+      success: function (res) {
+        let version = res.SDKVersion;
+        version = version.replace(/\./g, "");
+        console.log('当前版本号: ' + version);
+      }
+    });
+
+    wxRequestCode().then(code => {
+      console.log(code);
+      var code = code;
+      app.globalData.jscode = code;
+    })
+    // wx.login({
+    //   success: res => {
+    //     // resolve(res.code)
+    //     // resolve(res.code)
+    //     console.log(res);
+    //     var code = res.code;
+    //     app.globalData.jscode = code;
+    //   }
+    // })
   },
 
   /**
@@ -92,20 +92,24 @@ Page({
   onShareAppMessage: function () {
 
   },
-  checkedTap: function() {
+  handleReturn() {
+    wx.switchTab({
+      url: '../my/index'
+    })
+  },
+  checkedTap() {
     var radioFlag = this.data.radioFlag;
     this.setData({
       "radioFlag": !radioFlag
     })
   },
-  getPhoneNumber (e) {
+  getPhoneNumber(e) {
     console.log(e.detail.code);
     console.log(e);
     this.code = e.detail.code;
     this.handleLogin();
-
   },
-  handleLogin(){
+  handleLogin() {
     let that = this;
     wx.showLoading({
       title: '登录中',
@@ -120,40 +124,41 @@ Page({
         wx.setStorageSync('mobile', res.mobile);
         this.getOssInfo();
         this.setData({
-          loginStatus:true
+          loginStatus: true
         })
         this.getInfo();
         this.refreshData();
         this.getWxVersion();
         wxToast({
           title: '登录成功'
-        })
+        });
+        wx.switchTab({
+          url: '../my/index'
+        });
       } else {
-        let weixinId= res.weixinId;
+        let weixinId = res.weixinId;
         app.globalData.weixinId = weixinId;
         wxToast({
           title: '暂未注册，请完成注册！'
         })
         wxReLaunch(`../token/index`)
       }
-    }).catch(err =>{
+    }).catch(err => {
       wxRequestCode().then(code => {
         console.log(code);
         var code = code;
-        //wx.setStorageSync('code', code)
         app.globalData.jscode = code;
-        //that.handleLogin();
       })
     })
   },
-  signOut(){
+  signOut() {
     http.post(Url.login.out).then(_ => {
       wx.clearStorage()
       wxToast({
         title: '退出成功'
       })
       this.setData({
-        loginStatus:false
+        loginStatus: false
       })
       wxRequestCode().then(code => {
         console.log(code);
@@ -167,7 +172,7 @@ Page({
         title: '退出成功'
       })
       this.setData({
-        loginStatus:false
+        loginStatus: false
       })
       //wxReLaunch("../my/index")
     })

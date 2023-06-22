@@ -1,1 +1,102 @@
 /* pages/share/index.wxss */
+.page {
+  position: relative;
+  padding: 24rpx;
+}
+
+.top-title {
+  width: 704rpx;
+  height: 88rpx;
+  background: linear-gradient(180deg, #FFEACA 0%, #FFEED2 100%);
+  border-radius: 15rpx 15rpx 0rpx 0rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #1F2635;
+}
+
+.downImg {
+  width: 30.77rpx;
+  height: 30.77rpx;
+  margin-left: 8rpx;
+}
+
+.share-pic {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FF470D;
+}
+
+.shareBg {
+  position: absolute;
+  width: 703.85rpx;
+  height: 1251.92rpx;
+  z-index: 1;
+  padding-bottom: 156rpx;
+}
+
+.org-name {
+  z-index: 2;
+  position: absolute;
+  top: 98rpx;
+}
+
+.org-code {
+  z-index: 2;
+  position: absolute;
+  top: 144rpx;
+}
+
+.share-group {
+  position: fixed;
+  bottom: 32rpx;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 658rpx;
+  height: 92rpx;
+  background: linear-gradient(90deg, #FF775A 0%, #FF5473 100%);
+  border-radius: 46rpx;
+}
+
+.share-item-first {
+  position: relative;
+  height: 100%;
+}
+
+.share-item {
+  position: relative;
+  height: 100%;
+}
+
+.share-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rpx;
+  height: 42rpx;
+  background: #fe938d;
+}
+
+.shareImg {
+  width: 31rpx;
+  height: 31rpx;
+  margin-top: 2rpx;
+}
+
+.share-text {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  margin-left: 8rpx;
+}

@@ -7,52 +7,75 @@
   display: -webkit-flex;
   display: flex;
 }
-.fb-center{
+
+.fb-center {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-box;
   display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: center; /*老语法*/
+  -webkit-box-pack: center;
+  /*老语法*/
   -webkit-justify-content: center;
   justify-content: center;
-  -webkit-box-align: start; /*老语法*/
-  box-align: start; /*老语法*/
+  -webkit-box-align: start;
+  /*老语法*/
+  box-align: start;
+  /*老语法*/
   -webkit-align-items: flex-start;
   align-items: flex-start;
 }
+
 /* 容器属性 */
 /* 1、flex-direction 主轴方向 */
 .fb-row {
-  -webkit-box-direction: normal; /*老语法*/
-  -webkit-box-orient: horizontal; /*老语法*/
+  -webkit-box-direction: normal;
+  /*老语法*/
+  -webkit-box-orient: horizontal;
+  /*老语法*/
   -webkit-flex-direction: row;
   flex-direction: row;
 }
+
 .fb-row-rev {
   /* box-direction只是改变了子元素的排序，并没有改变对齐方式，需要新增一个 box-pack 来改变对齐方式*/
-  -webkit-box-pack: end; /*老语法*/
-  box-pack: end; /*老语法*/
-  -webkit-box-direction: reverse; /*老语法*/
-  box-direction: reverse; /*老语法*/
-  -webkit-box-orient: horizontal; /*老语法*/
-  box-orient: horizontal; /*老语法*/
+  -webkit-box-pack: end;
+  /*老语法*/
+  box-pack: end;
+  /*老语法*/
+  -webkit-box-direction: reverse;
+  /*老语法*/
+  box-direction: reverse;
+  /*老语法*/
+  -webkit-box-orient: horizontal;
+  /*老语法*/
+  box-orient: horizontal;
+  /*老语法*/
   -webkit-flex-direction: row-reverse;
   flex-direction: row-reverse;
 }
+
 .fb-col {
-  -webkit-box-direction: normal; /*老语法*/
-  box-direction: normal; /*老语法*/
-  -webkit-box-orient: vertical; /*老语法*/
-  box-orient: vertical; /*老语法*/
+  -webkit-box-direction: normal;
+  /*老语法*/
+  box-direction: normal;
+  /*老语法*/
+  -webkit-box-orient: vertical;
+  /*老语法*/
+  box-orient: vertical;
+  /*老语法*/
   -webkit-flex-direction: column;
   flex-direction: column;
 }
+
 .fb-col-rev {
   /* box-direction只是改变了子元素的排序，并没有改变对齐方式，需要新增一个 box-pack 来改变对齐方式*/
-  -webkit-box-pack: end; /*老语法*/
-  -webkit-box-direction: reverse; /*老语法*/
-  -webkit-box-orient: vertical; /*老语法*/
+  -webkit-box-pack: end;
+  /*老语法*/
+  -webkit-box-direction: reverse;
+  /*老语法*/
+  -webkit-box-orient: vertical;
+  /*老语法*/
   -webkit-flex-direction: column-reverse;
   flex-direction: column-reverse;
 }
@@ -60,12 +83,16 @@
 /* 2、flex-wrap 设置溢出换行 */
 .fb-nowrap {
   -webkit-flex-wrap: none;
-  flex-wrap: none; /* 溢出不换行 强制一行，元素同比缩小 */
+  flex-wrap: none;
+  /* 溢出不换行 强制一行，元素同比缩小 */
 }
+
 .fb-wrap {
   -webkit-flex-wrap: wrap;
-  flex-wrap: wrap; /* 溢出换行 */
+  flex-wrap: wrap;
+  /* 溢出换行 */
 }
+
 .fb-wrap-rev {
   -webkit-flex-wrap: wrap-reverse;
   flex-wrap: wrap-reverse;
@@ -75,26 +102,34 @@
 
 /* 4、justify-content属性定义了项目在主轴上的对齐方式 */
 .fb-main-start {
-  -webkit-box-pack: start; /*老语法*/
+  -webkit-box-pack: start;
+  /*老语法*/
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
+
 .fb-main-center {
-  -webkit-box-pack: center; /*老语法*/
+  -webkit-box-pack: center;
+  /*老语法*/
   -webkit-justify-content: center;
   justify-content: center;
 }
+
 .fb-main-end {
-  -webkit-box-pack: end; /*老语法*/
+  -webkit-box-pack: end;
+  /*老语法*/
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
+
 /* 两端对齐，项目之间的间隔都相等 */
 .fb-main-between {
-  -webkit-box-pack: justify; /*老语法*/
+  -webkit-box-pack: justify;
+  /*老语法*/
   -webkit-justify-content: space-between;
   justify-content: space-between;
 }
+
 /* 每个项目两侧的间隔相等。项目之间的间隔比项目与边框的间隔大一倍。 */
 .fb-main-around {
   -webkit-justify-content: space-around;
@@ -103,38 +138,60 @@
 
 /* 5、align-items属性定义项目在交叉轴上如何对齐 */
 .fb-cross-start {
-  -webkit-box-align: start; /*老语法*/
-  box-align: start; /*老语法*/
+  -webkit-box-align: start;
+  /*老语法*/
+  box-align: start;
+  /*老语法*/
   -webkit-align-items: flex-start;
   align-items: flex-start;
 }
+
 .fb-cross-center {
-  -webkit-box-align: center; /*老语法*/
-  box-align: center; /*老语法*/
+  -webkit-box-align: center;
+  /*老语法*/
+  box-align: center;
+  /*老语法*/
   -webkit-align-items: center;
   align-items: center;
 }
+
 .fb-cross-end {
-  -webkit-box-align: end; /*老语法*/
-  box-align: end; /*老语法*/
+  -webkit-box-align: end;
+  /*老语法*/
+  box-align: end;
+  /*老语法*/
   -webkit-align-items: flex-end;
   align-items: flex-end;
 }
+
 /* 项目的第一行文字的基线对齐 */
 .fb-cross-baseline {
-  -webkit-box-align: baseline; /*老语法*/
-  box-align: baseline; /*老语法*/
+  -webkit-box-align: baseline;
+  /*老语法*/
+  box-align: baseline;
+  /*老语法*/
   -webkit-align-items: baseline;
   align-items: baseline;
 }
+
 /* 如果项目未设置高度或设为auto，将占满整个容器的高度 */
 .fb-cross-stretch {
-  -webkit-box-align: stretch; /*老语法*/
-  box-align: stretch; /*老语法*/
+  -webkit-box-align: stretch;
+  /*老语法*/
+  box-align: stretch;
+  /*老语法*/
   -webkit-align-items: stretch;
   align-items: stretch;
 }
+
 /* 项目属性 */
+
+.fb-row-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
 /* 3、flex-shrink属性定义了项目的缩小比例
     缩小：默认1（如果空间不足则会缩小，值为0不缩小)
@@ -152,4 +209,5 @@
   -webkit-flex: 1;
   flex: 1;
 }
+
 /*********************sass*****************************/

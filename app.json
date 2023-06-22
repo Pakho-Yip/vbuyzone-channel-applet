@@ -22,23 +22,11 @@
     }
   },
   "tabBar": {
-    "borderStyle": "black",
-    "backgroundColor": "#fff",
-    "color": "#8F8F94",
-    "selectedColor": "#f33e54",
+    "borderStyle": "white",
+    "backgroundColor": "#FFFFFF",
+    "color": "#9094A6",
+    "selectedColor": "#FF5473",
     "list": [
-      {
-        "pagePath": "pages/income/index",
-        "text": "收益",
-        "iconPath": "assets/images/tabbar_icon_income_nor.png",
-        "selectedIconPath": "assets/images/tabbar_icon_income_sel.png"
-      },
-      {
-        "pagePath": "pages/fans/index",
-        "text": "粉丝",
-        "iconPath": "assets/images/tabbar_icon_fans_nor.png",
-        "selectedIconPath": "assets/images/tabbar_icon_fans_sel.png"
-      },
       {
         "pagePath": "pages/share/index",
         "text": "分享",

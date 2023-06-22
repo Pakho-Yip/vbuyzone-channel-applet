@@ -12,19 +12,17 @@
             {{name}}
           </view>
           <view class="absolute {{identityAuthState=='AUTHED'&&truckAuthState=='AUTHED'?'':'grayscale'}}" style="right:10rpx;top:18rpx">
-              <image class="w-34 h-34" src="../../assets/images/hy.png"></image>
-            </view>
-          <view class="mt-8 font-20 bg-hy bd-radio-14 text-center c-FFF0F0 relative"
-            style="height:28rpx;width:140rpx;line-height:28rpx">
+            <image class="w-34 h-34" src="../../assets/images/hy.png"></image>
+          </view>
+          <view class="mt-8 font-20 bg-hy bd-radio-14 text-center c-FFF0F0 relative" style="height:28rpx;width:140rpx;line-height:28rpx">
             <view>
-                {{mobile}} 
+              {{mobile}}
             </view>
-          
           </view>
         </view>
-        <view class="ml-32 mt-115 fb fb-cross-center" wx:else bindtap="handleLogin" >
+        <view class="ml-32 mt-115 fb fb-cross-center" wx:else bindtap="handleLogin">
           <view class="font-31 c-FFFFFF fw-500">
-           登录/注册
+            立即登录
           </view>
         </view>
       </view>
