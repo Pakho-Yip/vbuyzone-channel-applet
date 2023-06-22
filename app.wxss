@@ -1,0 +1,29 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  width: 100%;
+  padding: 20rpx 48rpx;
+}
+.bottomBtn{
+  bottom: 0;
+  height: 168rpx;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center
+}
+.toNext{
+  width: 584rpx;
+  height: 80rpx;
+  background: linear-gradient(126deg, #FFAB90 0%, #FF6969 100%);
+  border-radius: 8rpx;
+  line-height: 80rpx;
+  border: none;
+  color: #ffffff;
+  margin: 0 84rpx;
+}
+@import "./assets/wxss/common.wxss";
+@import "./assets/wxss/font.wxss";
+@import "./assets/wxss/flex.wxss";
