@@ -1,0 +1,27 @@
+
+// 使用var定义一个json开头 将所有的过滤器写在unit中
+ var fmtwayBillState = function(value) {
+    console.log(111);
+    var waybillState =  [
+      { text: "无效", value: "INVALID" },
+      { text: "已报废", value: "DISCARD" },
+      { text: "未提货", value: "INIT" },
+      { text: "未签收", value: "PICKED" },
+      { text: "已签收", value: "ARRIVED" },
+      { text: "已回单", value: "RECEIPTED" },
+      { text: "已确认", value: "RECEIPTED_CONFIRM" }
+    ];
+    for(var i = 0;i<waybillState.length;i++){
+      if(waybillState[i].value == value){
+        return waybillState[i].text;
+      }
+    }
+    return value
+  }
+
+
+// 导出过滤器 这段代码必写
+module.exports = {
+  // 格式为 导出的名字: json名字.函数名字 
+  fmtwayBillState: fmtwayBillState
+}

@@ -1,0 +1,67 @@
+/* pages/authentication/frontOfIDCard/frontOfIDCard.wxss */
+
+
+.camera_box {
+  height: 100vh; width: 100vw;
+  position: relative;
+}
+.camera {
+  height: 100vh; width: 100vw;
+  z-index: 1;
+}
+.id_m {
+  height: 85vh; width: 100vw;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  position: absolute;
+}
+.id_m .img {
+  width: 550rpx;
+  height: 900rpx;
+  display: block;
+  position: absolute;
+  left: 0; right: 0; margin: auto auto;
+  top: 0; bottom: 0;
+}
+.id_m .tips_txt {
+  transform:rotate(90deg);
+}
+.camera_box .action {
+  width: 100vw;
+  height: 15vh;
+  position: fixed;
+  z-index: 6;
+  display: flex;
+  bottom: 0;
+  justify-content: space-around;
+  align-items: center;
+} 
+.takeBtn {
+  height: 132rpx; width: 132rpx;border-radius: 50%;
+  font-size: 24rpx;
+}
+.camera_box .cancelBtn,.camera_box .saveImg  {
+  width:72rpx;
+  height:72rpx;
+  border-radius: 50%;
+  padding:30rpx;
+  font-size: 24rpx;
+}
+.camera_box .takeBtn::after {
+  border: none;
+}
+.camera_img {
+  height: 100vh; width: 100%;
+}
+.id_m .tips_txt {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) rotate(90deg);
+	width: 542rpx;
+	height: 35rpx;
+	font-size: 34rpx;
+	color: #EA952F;
+	font-weight: 500;
+}

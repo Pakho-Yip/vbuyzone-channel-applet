@@ -1,0 +1,21 @@
+<!--index.wxml-->
+<view class="w-full h-full">
+  <view class="mt-178">
+    <view class="fb fb-main-center fb-cross-center">
+      <image src="../../assets/images/logo.png" alt="船小智" style="height:120rpx;width:120rpx" />
+    </view>
+  </view>
+  <view class="mt-22 c-000 font-32 text-center">
+    粉惠街
+  </view>
+  <view class="fb fb-main-center fb-cross-center mt-240">
+    <button class="h-90 bg-token fb fb-main-center fb-cross-center bd-radio-12 c-fff-90" style="width:656rpx"
+      open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+      注册登录
+    </button>
+  </view>
+  <view class="mt-40 text-center font-24 c-000-45 lh-34">
+    <text>登录代表您已同意</text>
+    <text class="ml-6 c-orange" bindtap="handleProtocol">粉惠街用户协议及隐私协议</text>
+  </view>
+</view>

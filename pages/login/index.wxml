@@ -1,0 +1,74 @@
+<!--pages/login/index.wxml-->
+<view>
+  <view class="page">
+    <!-- <image style="width:100%;height:100%;" src="../../assets/images/login_bg_miao_nor.png" mode='aspectFill'></image> -->
+    <view class="content">
+      <view class="bgfff">
+        <!-- 是平台用户 -->
+          <view wx:if="{{false}}">
+            <view class="chooseTop">
+              <view class="fb fb-main-center fb-cross-center">
+                <button 
+                  class="button" 
+                  style="width: 83.5vw;" 
+                  open-type="getPhoneNumber" 
+                  bindgetphonenumber="getPhoneNumber" 
+                >
+                  微信登录
+                </button>
+              </view>
+              <!-- <button class="button" bindtap="signOut" >
+                  <text class="btn-text">signOut</text>
+              </button> -->
+            </view>
+            <view class="agreement">
+              <label class="radio" catchtap='checkedTap'>
+                <radio class="radio-nocheck" checked="{{radioFlag}}" color='#FF5473' />
+              </label>
+              已阅读并同意
+              <navigator class="agreement-text" url="../my/settings/agreement" open-type="navigate">《粉惠街内购服务协议》
+              </navigator>和
+              <navigator class='agreement-text' url="../my/settings/about" open-type="navigate">《隐私政策》</navigator>
+            </view>
+          </view>
+        <!-- 不是平台用户 -->
+          <view wx:if="{{true}}" class="fb fb-col fb-main-center fb-cross-center">
+              <image style="width:230.77rpx;height:230.77rpx;" src="../../assets/images/icon_login_notauser.png"></image>
+              <text class="font-23 c-5E6B84">您还不是平台用户</text>
+              <image style="width:703.85rpx;height:884.62rpx;margin-top: 30.77rpx;" src="../../assets/images/pic_eguity_income.png"></image>
+              <view class="contact-style fb fb-col fb-main-center fb-cross-center">
+                <!-- <image class="loginline-style" style="width:703.85rpx;height:884.62rpx;margin-top: 30.77rpx;" src="../../assets/images/bg_login_line.png"></image> -->
+                <text class="font-27 c-1F2635 contact-title">若您愿意获得更高的睡后躺赚收益， 留下您的联系方式，以便我们联系您。</text>
+                <view class="inputList">
+                  <view class="inputbox">
+                    <view style="width: 150rpx;">
+                      姓名
+                    </view>
+                    <view>
+                      <input auto-focus placeholder="请输入"/>
+                    </view>
+                  </view>
+                  <view class="inputbox">
+                    <view style="width: 150rpx;">
+                      手机号
+                    </view>
+                    <view>
+                      <input auto-focus placeholder="请输入"/>
+                    </view>
+                  </view>
+                  <view class="inputbox" style="height: 265rpx;">
+                    <view style="width: 150rpx;">
+                      申请理由
+                    </view>
+                    <view>
+                      <textarea placeholder="您可以在这里描述您可以邀请进入内购福利的企业/社区/学校的名称及对应的人数，方便您更快速的成为我们的代理合伙人" style="width: 458rpx;margin-top: 25rpx;" auto-focus />
+                    </view>
+                  </view>
+                </view>
+
+              </view>
+          </view>
+      </view>
+    </view>
+  </view>
+</view>

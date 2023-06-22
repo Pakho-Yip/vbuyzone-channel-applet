@@ -1,0 +1,42 @@
+<!--pages/my/index.wxml-->
+<view>
+  <view class="fb h-124 fb-main-between w-full headTop" style="padding:20rpx 0;">
+    <view class="fb h-124 fb-main-between w-full">
+      <view class="fb fb-row head-wrap">
+        <view class="w-115 bd-radio-50 relative">
+          <open-data class="bd-radio-50 absolute w-115 h-115 headImg" type="userAvatarUrl"></open-data>
+          <!-- <image class="absolute head-bgc" src="../../assets/images/headwrap.png"></image> -->
+        </view>
+        <view class="ml-32 fb fb-col relative" wx:if="{{loginStatus}}">
+          <view class="font-32 c-3D3D3D text-blod h-60 mt-10 text-ellipsis " style="max-width:340rpx">
+            {{name}}
+          </view>
+          <view class="absolute {{identityAuthState=='AUTHED'&&truckAuthState=='AUTHED'?'':'grayscale'}}" style="right:10rpx;top:18rpx">
+              <image class="w-34 h-34" src="../../assets/images/hy.png"></image>
+            </view>
+          <view class="mt-8 font-20 bg-hy bd-radio-14 text-center c-FFF0F0 relative"
+            style="height:28rpx;width:140rpx;line-height:28rpx">
+            <view>
+                {{mobile}} 
+            </view>
+          
+          </view>
+        </view>
+        <view class="ml-32 mt-115 fb fb-cross-center" wx:else bindtap="handleLogin" >
+          <view class="font-31 c-FFFFFF fw-500">
+           登录/注册
+          </view>
+        </view>
+      </view>
+      <view class="mt-18 bd-radio-12 w-160 h-44 fb fb-main-center fb-cross-center bd-FFAFAF" wx:if="{{loginStatus}}">
+        <view class="fb-center">
+          <image class="w-24 h-24" src="../../assets/images/out.png"></image>
+        </view>
+        <view class="font-24 ml-4 fb c-FFA3A3" bindtap="handleOut">
+          退出登录
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
