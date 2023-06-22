@@ -50,7 +50,7 @@
   height: 46.15rpx;
   width: 46.15rpx;
   vertical-align: middle;
-  margin: 0 23.08rpx 0 215.38rpx;
+  margin-right: 23.08rpx;
   line-height: 92rpx;
 }
 
@@ -91,21 +91,21 @@
   background-size: 100% 100%;
   background-position: left;
   width:703.85rpx;
-  height:884.62rpx;
+  height:713.46rpx;
   margin-top: 30.77rpx;
   position: relative;
 }
 
 .contact-title {
   position: absolute;
-  top: 120rpx;
+  top: 102rpx;
   left: 31rpx;
   right: 70rpx;
 }
 
 .inputList {
   position: absolute;
-  top: 210rpx;
+  top: 192rpx;
   left: 31rpx;
 }
 
@@ -114,11 +114,23 @@
   font-size: 27rpx;
   align-items: center;
   padding-left: 31rpx;
-  /* padding-right: 31rpx; */
   color: #1F2635;
   height: 85rpx;
   background: #FFFFFF;
   border-radius: 8rpx;
   border: 2rpx solid #E4E7ED;
-  margin-bottom: 30.77rpx;
+  margin-bottom: 26rpx;
+}
+
+.bottom-btn {
+  width: 627rpx;
+  height: 92rpx;
+  background: linear-gradient(90deg, #FF775A 0%, #FF5473 100%);
+  border-radius: 46rpx;
+  margin: 44.23rpx 0 30.77rpx 0;
+  font-size: 31rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 92rpx;
 }

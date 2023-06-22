@@ -163,7 +163,6 @@ Page({
       //wxReLaunch("../my/index")
     }).catch(_ => {
       wx.clearStorage()
-
       wxToast({
         title: '退出成功'
       })
