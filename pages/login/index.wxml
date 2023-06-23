@@ -8,12 +8,18 @@
     </view>
     <!-- <view class="content">
       <view class="bgfff"> -->
-    <view class="content">
+    <view class="content scroll">
       <view class="">
         <!-- 是平台用户 -->
         <view wx:if="{{true}}">
           <view class="chooseTop">
-            <view class="fb fb-main-center fb-cross-center">
+            <view wx:if="{{radioFlag == false}}" class="fb fb-main-center fb-cross-center">
+              <button class="button" style="width: 83.5vw;" bindtap="handleAgree">
+                <image style="width: 46.15rpx;height: 46.15rpx" class="weixin-logo" src="../../assets/images/login_icon_wechat_nor.png" />
+                微信登录
+              </button>
+            </view>
+            <view wx:else="" class="fb fb-main-center fb-cross-center">
               <button class="button" style="width: 83.5vw;" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
                 <image style="width: 46.15rpx;height: 46.15rpx" class="weixin-logo" src="../../assets/images/login_icon_wechat_nor.png" />
                 微信登录
@@ -34,7 +40,7 @@
           </view>
         </view>
         <!-- 不是平台用户 -->
-        <view wx:if="{{false}}" class="fb fb-col fb-main-center fb-cross-center">
+        <view wx:if="{{false}}" class="fb fb-col fb-main-center fb-cross-center" style="margin-bottom: 124rpx;">
           <image style="width:230.77rpx;height:230.77rpx;" src="../../assets/images/icon_login_notauser.png"></image>
           <text class="font-23 c-5E6B84">您还不是平台用户</text>
           <image style="width:703.85rpx;height:884.62rpx;margin-top: 30.77rpx;" src="../../assets/images/pic_eguity_income.png"></image>
@@ -47,7 +53,7 @@
                   姓名
                 </view>
                 <view>
-                  <input auto-focus placeholder="请输入" />
+                  <input value="{{linkMan}}" bindinput="linkManInput" placeholder="请输入" />
                 </view>
               </view>
               <view class="inputbox">
@@ -55,7 +61,7 @@
                   手机号
                 </view>
                 <view>
-                  <input auto-focus placeholder="请输入" />
+                  <input value="{{linkMobileNumber}}" bindinput="mobileInput" placeholder="请输入" />
                 </view>
               </view>
               <view class="inputbox" style="height: 265rpx;">
@@ -63,12 +69,12 @@
                   申请理由
                 </view>
                 <view style="width: 458rpx;">
-                  <textarea placeholder="您可以在这里描述您可以邀请进入内购福利的企业/社区/学校的名称及对应的人数，方便您更快速的成为我们的代理合伙人" style="width: 425rpx;height: 240rpx;margin-top: 45rpx;margin-bottom: 45rpx;" maxlength="-1" auto-focus />
+                  <textarea value="{{applyReasons}}" bindinput="reasonInput" placeholder="您可以在这里描述您可以邀请进入内购福利的企业/社区/学校的名称及对应的人数，方便您更快速的成为我们的代理合伙人" style="width: 425rpx;height: 240rpx;margin-top: 45rpx;margin-bottom: 45rpx;" maxlength="-1" />
                 </view>
               </view>
             </view>
           </view>
-          <view class="bottom-btn fb fb-main-center fb-cross-center">
+          <view class="bottom-btn fb fb-main-center fb-cross-center" bindtap="commit">
             提交
           </view>
         </view>

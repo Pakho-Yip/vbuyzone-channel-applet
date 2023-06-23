@@ -38,7 +38,6 @@ Page({
     }
     this.mobile = e.detail.encryptedData;
     this.iv = e.detail.iv;
-    this.register();
   },
   getOssInfo() {
     http.get(Url.common.oss, null).then(res => {
@@ -48,32 +47,6 @@ Page({
       console.log(_ossConfValue)
       // app.globalData.ossConfValue = JSON.parse(_ossConfValue);
       wx.setStorageSync("_ossConfValue", _ossConfValue)
-    })
-  },
-  register: function () {
-    let that = this;
-    let params = {
-      mobile:this.mobile,
-      weixinId:app.globalData.weixinId,
-      iv: this.iv
-    }
-    http.post(Url.login.register, params).then(res => {
-      console.log("register", res);
-      wx.setStorageSync('tokenId', res.token);
-      wx.setStorageSync('mobile', res.mobile)
-      this.getOssInfo();
-      wxToast({
-        title: '登录成功'
-      })
-      wxSwitchTab("../my/index")
-    }).catch(err =>{
-      wxRequestCode().then(code => {
-        console.log(code);
-        var code = code;
-        //wx.setStorageSync('code', code)
-        app.globalData.jscode = code;
-        //that.register();
-      })
     })
   }
 })

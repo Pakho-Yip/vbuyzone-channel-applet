@@ -133,10 +133,13 @@
   height: 92rpx;
   background: linear-gradient(90deg, #FF775A 0%, #FF5473 100%);
   border-radius: 46rpx;
-  margin: 44.23rpx 0 30.77rpx 0;
+  margin: 44rpx 0 32rpx 0;
   font-size: 31rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #FFFFFF;
   line-height: 92rpx;
+  position: fixed;
+  bottom: 0;
+  z-index: 5;
 }

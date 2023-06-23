@@ -3,7 +3,8 @@ const app = getApp()
 import http from "../../api/httpUtils"
 import Url from "../../api/url"
 import {
-  wxRequestCode
+  wxRequestCode,
+  wxToast
 } from '../../api/wxSdkUtils'
 Page({
 
@@ -12,7 +13,10 @@ Page({
    */
   data: {
     radioFlag: false,
-    code: ""
+    code: "",
+    linkMan: "",
+    linkMobileNumber: "",
+    applyReasons: ""
   },
 
   /**
@@ -98,16 +102,42 @@ Page({
     })
   },
   checkedTap() {
-    var radioFlag = this.data.radioFlag;
-    this.setData({
+    let that = this;
+    var radioFlag = that.data.radioFlag;
+    that.setData({
       "radioFlag": !radioFlag
     })
+  },
+  handleAgree() {
+    if (!this.data.radioFlag) {
+      wx.showToast({
+        icon: "none",
+        title: '请阅读并同意平台服务协议及隐私协议',
+        duration: 2000
+      })
+      return false
+    }
   },
   getPhoneNumber(e) {
     console.log(e.detail.code);
     console.log(e);
-    this.code = e.detail.code;
-    this.handleLogin();
+    console.log(this.data.radioFlag);
+    if (!this.data.radioFlag) {
+      console.log("weixuanzhong")
+      // this.status = true;
+      // this.flag = 'weixin'
+      return;
+    }
+    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') { //用户点击拒绝
+      wx.showToast({
+        title: '请绑定手机号',
+        duration: 2000,
+        icon: 'none',
+      });
+    } else {
+      this.code = e.detail.code;
+      this.handleLogin();
+    }
   },
   handleLogin() {
     let that = this;
@@ -149,6 +179,58 @@ Page({
         var code = code;
         app.globalData.jscode = code;
       })
+    })
+  },
+  linkManInput(e) {
+    let value = e.detail.value;
+    this.setData({
+      linkMan: value
+    })
+  },
+  mobileInput(e) {
+    let value = e.detail.value;
+    this.setData({
+      linkMobileNumber: value
+    })
+  },
+  reasonInput(e) {
+    let value = e.detail.value;
+    this.setData({
+      applyReasons: value
+    })
+  },
+  commit() {
+    console.log(this.data)
+    if (!this.data.linkMan) {
+      wxToast({
+        title: '请输入姓名',
+        icon: "none"
+      })
+      return
+    }
+    if (!this.data.linkMobileNumber) {
+      wxToast({
+        title: '请输入手机号',
+        icon: "none"
+      })
+      return
+    }
+    if (!this.data.applyReasons) {
+      wxToast({
+        title: '请输入申请理由',
+        icon: "none"
+      })
+      return
+    }
+    let param = {};
+    param.linkMan = this.data.linkMan;
+    param.linkMobileNumber = this.data.linkMobileNumber;
+    param.applyReasons = this.data.applyReasons;
+    console.log(param);
+    http.post(Url.login.channelAgentApply, param).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
     })
   },
   signOut() {

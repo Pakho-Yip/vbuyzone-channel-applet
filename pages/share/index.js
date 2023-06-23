@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    loginStatus: false,
   },
 
   /**
@@ -66,7 +66,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    if (!wx.getStorageSync('tokenId')) {
+      that.setData({
+        loginStatus: false
+      })
+      wx.navigateTo({
+        url: '../login/index'
+      })
+      return;
+    }
+    this.setData({
+      loginStatus: true
+    })
   },
 
   /**

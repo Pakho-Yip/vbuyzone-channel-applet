@@ -7,17 +7,12 @@ let apiHost = config[app.globalData.env].apiHost;
 export default {
   // 登录相关接口
   login: {
-
-
-    // login: apiHost + "/app/login/driver/applets/login", // 登录
-    // register: apiHost + "/app/login/driver/applets/register", // 注册
-    // out: apiHost + "/app/login/loginOut", // 登出@登出
-
     login: apiHost + "/applet/wechat/login", // 微信授权登录
     out: apiHost + "/applet/wechat/signOut", // 登出
-    
-    changePhone: apiHost + "/driverApplets/waybill/changeDriverAppletMobile",//更换手机号绑定
-    creCheck:apiHost + "/app/login/credentialsCheck",//账户证件信息检查
+    channelAgentApply: apiHost + "/applet/channelAgent/apply" // 提交渠道商申请
+  },
+  share: {
+    queryInviteCode: apiHost + "/inviteCode/queryInviteCodesByChannelAgent" // 查询渠道商所有邀请码
   },
   common: {
     conf: apiHost + "/app/common/conf/wx_checking_version", // 获取车小智版本配置信息 

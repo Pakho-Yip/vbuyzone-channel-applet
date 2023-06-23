@@ -71,7 +71,6 @@ Page({
           truckAuthState: truckAuthState,
           haveSignedAgreement: haveSignedAgreement
         })
-        this.creCheck();
       }
     })
   },
@@ -182,7 +181,6 @@ Page({
     this.refreshData();
     this.getInfo();
     this.getWxVersion();
-    //this.creCheck();
   },
   handleOut() {
     http.post(Url.login.out).then(_ => {
@@ -211,30 +209,5 @@ Page({
       //wxReLaunch("../my/index")
     })
   },
-  creCheck() {
-    if (this.data.confState) {
-      return
-    }
-    if (this.data.identityAuthState == 'UNAUTH') {
-      console.log("未提交身份认证")
-      return;
-    };
-    http.post(Url.login.creCheck).then(res => {
-      if (!res.licensePicCheck || !res.truckCheck || !res.bankCardCheck || !res.negativeIdentityPicCheck) {
-        let nowGetDate = new Date().getDate().toString(); //得到日期
-        if (wx.getStorageSync("credentialsCheckDate")) {
-          if (nowGetDate != wx.getStorageSync("credentialsCheckDate")) {
-            wx.setStorageSync("credentialsCheckDate", nowGetDate)
-            wxNavigateTo("../supplementary/index");
-          } else {
-            console.log('同一天提醒一次')
-          }
-        } else {
-          wx.setStorageSync("credentialsCheckDate", nowGetDate)
-          wxNavigateTo("../supplementary/index");
-        }
-      }
-    }).catch(_ => {
-    })
-  }
+
 })
