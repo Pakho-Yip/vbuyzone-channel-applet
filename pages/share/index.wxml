@@ -53,5 +53,8 @@
         确定
       </view>
     </view>
+    <!-- <canvas canvas-id='share' style='width:100vw;height:100vh;'></canvas> -->
+    <canvas id="myCanvas" type="2d" style="border: 1px solid;width:366px;height:651px;z-index: 9999;" />
+
   </view>
 </view>
