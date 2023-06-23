@@ -7,6 +7,30 @@ Page({
    */
   data: {
     loginStatus: false,
+    animationData: {},
+    showModalStatus: false,
+    list: [{
+      name: "小虫科技",
+      isCheck: false
+    }, {
+      name: "大客户名称",
+      isCheck: true
+    }, {
+      name: "大客户名称",
+      isCheck: false
+    }, {
+      name: "大客户名称",
+      isCheck: false
+    }, {
+      name: "大客户名称",
+      isCheck: false
+    }, {
+      name: "大客户名称",
+      isCheck: false
+    }, {
+      name: "大客户名称",
+      isCheck: false
+    }]
   },
 
   /**
@@ -67,18 +91,18 @@ Page({
    */
   onShow: function () {
     let that = this;
-    if (!wx.getStorageSync('tokenId')) {
-      that.setData({
-        loginStatus: false
-      })
-      wx.navigateTo({
-        url: '../login/index'
-      })
-      return;
-    }
-    this.setData({
-      loginStatus: true
-    })
+    // if (!wx.getStorageSync('tokenId')) {
+    //   that.setData({
+    //     loginStatus: false
+    //   })
+    //   wx.navigateTo({
+    //     url: '../login/index'
+    //   })
+    //   return;
+    // }
+    // this.setData({
+    //   loginStatus: true
+    // })
   },
 
   /**
@@ -163,4 +187,20 @@ Page({
       })
     }.bind(this), 200)
   },
+  selectItem(e) {
+    console.log(e.currentTarget.dataset.index)
+    let datas = this.data.list;
+    for (var i = 0; i < datas.length; i++) {
+      if (i == e.currentTarget.dataset.index) {
+        datas[i].isCheck = true;
+      } else {
+        datas[i].isCheck = false;
+      }
+      this.setData({
+        list: datas
+      })
+    }
+
+
+  }
 })

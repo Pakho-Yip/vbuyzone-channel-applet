@@ -132,7 +132,7 @@ Page({
   },
   onShow: function () {
     let that = this;
-    this.getWxVersion();
+    // this.getWxVersion();
     // if (!wx.getStorageSync('tokenId')) {
     //   that.setData({
     //     loginStatus: false
@@ -180,7 +180,7 @@ Page({
     }
     this.refreshData();
     this.getInfo();
-    this.getWxVersion();
+    // this.getWxVersion();
   },
   handleOut() {
     http.post(Url.login.out).then(_ => {
