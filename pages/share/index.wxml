@@ -1,9 +1,9 @@
 <!--pages/share/index.wxml-->
 <view>
   <view class="page">
-    <view class="top-title" bindtap="selectCode">
+    <view class="top-title">
       小虫科技企业专属邀请海报
-      <image class="downImg" src="../../assets/images/share/icon_down_nor.png" mode="widthFix" lazy-load></image>
+      <image bindtap="selectCode" class="downImg" src="../../assets/images/share/icon_down_nor.png" mode="widthFix" lazy-load></image>
     </view>
     <view class="share-pic">
       <view class="org-name">
@@ -13,7 +13,8 @@
         Z7838K
       </view>
       <view class="qrcode">
-        <canvas type="2d" style="width: 130px; height: 130px;position: absolute;top: 413px;" id="myQrcode"></canvas>
+        <!-- <canvas type="2d" style="width: 130px; height: 130px;position: absolute;top: 413px;" id="myQrcode"></canvas> -->
+        <canvas type="2d" style="width: 130px; height: 130px;z-index: 999;position: absolute;top: 413px;" id="myQrcode"></canvas>
       </view>
       <image class="shareBg" src="../../assets/images/share/bg_share_poster_bg.png" mode="widthFix" lazy-load></image>
     </view>

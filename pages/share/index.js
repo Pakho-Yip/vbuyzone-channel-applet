@@ -1,5 +1,7 @@
 // pages/share/index.js
 import drawQrcode from '../../utils/weapp.qrcode.esm.js'
+import http from "../../api/httpUtils"
+import Url from "../../api/url"
 Page({
 
   /**
@@ -9,6 +11,7 @@ Page({
     loginStatus: false,
     animationData: {},
     showModalStatus: false,
+    sharelink: "https://www.fenhuijie.com/vbuyzone-fenhuijie-web/appDow.html",
     list: [{
       name: "小虫科技",
       isCheck: false
@@ -37,46 +40,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // const query = wx.createSelectorQuery()
-    // query.select('#myQrcode')
-    //   .fields({
-    //     node: true,
-    //     size: true
-    //   })
-    //   .exec((res) => {
-    //     var canvas = res[0].node
-
-    //     // 调用方法drawQrcode生成二维码
-    //     drawQrcode({
-    //       canvas: canvas,
-    //       canvasId: 'myQrcode',
-    //       // width: 130,
-    //       // padding: 0,
-    //       background: '#ffffff',
-    //       foreground: '#000000',
-    //       text: '个人二维码信息',
-    //     })
-
-    //     // 获取临时路径（得到之后，想干嘛就干嘛了）
-    //     wx.canvasToTempFilePath({
-    //       canvasId: 'myQrcode',
-    //       canvas: canvas,
-    //       x: 0,
-    //       y: 0,
-    //       width: 130,
-    //       height: 130,
-    //       destWidth: 130,
-    //       destHeight: 130,
-    //       success(res) {
-    //         console.log('二维码临时路径：')
-
-    //         // console.log('二维码临时路径：', res.tempFilePath)
-    //       },
-    //       fail(res) {
-    //         console.error(res)
-    //       }
-    //     })
-    //   })
+    this.getQrcode();
+    this.getInviteCodes();
   },
 
   /**
@@ -140,6 +105,58 @@ Page({
 
   },
 
+  //生成二维码
+  getQrcode() {
+    const query = wx.createSelectorQuery()
+    query.select('#myQrcode')
+      .fields({
+        node: true,
+        size: true
+      })
+      .exec((res) => {
+        var canvas = res[0].node
+
+        // 调用方法drawQrcode生成二维码
+        drawQrcode({
+          canvas: canvas,
+          canvasId: 'myQrcode',
+          // width: 130,
+          // padding: 0,
+          background: '#ffffff',
+          foreground: '#000000',
+          text: this.data.sharelink,
+        })
+
+        // 获取临时路径（得到之后，想干嘛就干嘛了）
+        wx.canvasToTempFilePath({
+          canvasId: 'myQrcode',
+          canvas: canvas,
+          x: 0,
+          y: 0,
+          width: 130,
+          height: 130,
+          destWidth: 130,
+          destHeight: 130,
+          success(res) {
+            // console.log('二维码临时路径：', res.tempFilePath)
+          },
+          fail(res) {
+            console.error(res)
+          }
+        })
+      })
+  },
+  //查询渠道商所有邀请码
+  getInviteCodes() {
+    let param = {};
+    param.channelAgentId = "1111";
+    console.log(param);
+    http.get(Url.share.queryInviteCode, param).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
+  },
   selectCode() {
     this.showModal();
     wx.hideTabBar();
