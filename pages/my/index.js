@@ -17,7 +17,7 @@ Page({
     identityAuthState: '',
     truckAuthState: '',
     haveSignedAgreement: '',
-    name: "司机名",
+    name: "用户名",
     loginStatus: false,
     confState: true
   },
@@ -133,27 +133,27 @@ Page({
   onShow: function () {
     let that = this;
     this.getWxVersion();
-    if (!wx.getStorageSync('tokenId')) {
-      that.setData({
-        loginStatus: false
-      })
-      wx.showModal({
-        title: '提示',
-        content: '相关信息需要登录后才可查看，是否马上登录？',
-        success(res) {
-          if (res.confirm) {
-            that.handleLogin();
-          } else if (res.cancel) {
-          }
-        }
-      })
-      return;
-    }
-    this.setData({
-      loginStatus: true
-    })
-    this.getInfo();
-    this.refreshData();
+    // if (!wx.getStorageSync('tokenId')) {
+    //   that.setData({
+    //     loginStatus: false
+    //   })
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '相关信息需要登录后才可查看，是否马上登录？',
+    //     success(res) {
+    //       if (res.confirm) {
+    //         that.handleLogin();
+    //       } else if (res.cancel) {
+    //       }
+    //     }
+    //   })
+    //   return;
+    // }
+    // this.setData({
+    //   loginStatus: true
+    // })
+    // this.getInfo();
+    // this.refreshData();
   },
   getWxVersion() {
     http.get(Url.common.conf, '').then(res => {

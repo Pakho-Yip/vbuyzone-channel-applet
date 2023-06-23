@@ -36,5 +36,21 @@
       </view>
     </view>
   </view>
-
+  <view class="fb-col-center">
+    <image class="noLogin" src="../../assets/images/my/icon_login_nomessage.png" mode="widthFix" lazy-load></image>
+    <view class="noLogin-text">
+      暂时没有获得更多信息
+    </view>
+    <view class="noLogin-btn" bindtap="handleLogin">
+      立即登录
+    </view>
+    <view class="noLogin-tip fb-row-center" style="justify-content: space-between;">
+      <view style="margin-left: 46rpx;">
+        登录查看更多信息
+      </view>
+      <view class="noLogin-tip-btn" bindtap="handleLogin">
+        立即登录
+      </view>
+    </view>
+  </view>
 </view>

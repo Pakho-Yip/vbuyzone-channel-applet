@@ -193,6 +193,13 @@
   align-items: center;
 }
 
+.fb-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* 3、flex-shrink属性定义了项目的缩小比例
     缩小：默认1（如果空间不足则会缩小，值为0不缩小)
 */
