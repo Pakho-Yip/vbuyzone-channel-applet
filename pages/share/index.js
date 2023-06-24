@@ -281,10 +281,11 @@ Page({
         list: datas
       })
     }
-
-
   },
   savePoster() {
+    wx.showLoading({
+      title: '保存中',
+    })
     setTimeout(() => {
       wx.canvasToTempFilePath({
         canvas: this.data.canvas, // canvas 实例
@@ -295,11 +296,21 @@ Page({
             filePath: res.tempFilePath,
             success(res) {
               // 保存成功
+              wx.hideLoading();
               wx.showToast({
                 title: '已保存相册',
                 icon: 'success',
                 duration: 2000
               })
+            },
+            fail(e) {
+              wx.hideLoading();
+              wx.showToast({
+                title: '保存失败',
+                icon: 'none',
+                duration: 2000
+              })
+              console.log(e);
             }
           })
         }
