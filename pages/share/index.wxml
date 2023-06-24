@@ -14,8 +14,9 @@
       </view>
       <view class="qrcode">
         <!-- <canvas type="2d" style="width: 130px; height: 130px;z-index: 999;position: absolute;top: 413px;" id="myQrcode"></canvas> -->
+        <canvas type="2d" style="width: 130px; height: 130px;z-index: 999;margin-top: 794rpx;" id="myQrcode"></canvas>
         <!-- <canvas type="2d" style="width: 130px; height: 130px;z-index: 999;position: absolute;top: 800rpx;left:232rpx" id="myQrcode"></canvas> -->
-        <canvas type="2d" style="width: 250rpx; height: 250rpx;z-index: 999;" id="myQrcode"></canvas>
+        <!-- <canvas type="2d" style="width: 250rpx; height: 250rpx;z-index: 999;" id="myQrcode"></canvas> -->
       </view>
       <image class="shareBg" src="../../assets/images/share/bg_share_poster_bg.png" mode="widthFix" lazy-load></image>
     </view>
@@ -30,7 +31,7 @@
       </view>
       <view class="share-item fb-row-center item-flex-1">
         <image class="shareImg" src="../../assets/images/share/icon_share_copy.png" mode="widthFix" lazy-load></image>
-        <text class="share-text">复制邀请码</text>
+        <text class="share-text" bindtap="copyBtn">复制邀请码</text>
       </view>
     </view>
     <!--屏幕背景变暗的背景  -->

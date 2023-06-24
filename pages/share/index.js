@@ -3,7 +3,6 @@ import drawQrcode from '../../utils/weapp.qrcode.esm.js'
 import http from "../../api/httpUtils"
 import Url from "../../api/url"
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -14,6 +13,8 @@ Page({
     sharelink: "https://www.fenhuijie.com/vbuyzone-fenhuijie-web/appDow.html",
     localCodeUrl: '', //绘制的二维码图片本地路径
     saveFilePath: '',
+    codeText: '小虫科技无线无敌企业专属邀请码',
+    inviteCode: 'Z7838K',
     list: [{
       name: "小虫科技",
       isCheck: false
@@ -221,6 +222,7 @@ Page({
       console.log(err)
     })
   },
+  //点击出现底部弹窗
   selectCode() {
     this.showModal();
     wx.hideTabBar();
@@ -282,6 +284,7 @@ Page({
       })
     }
   },
+  //保存海报
   savePoster() {
     wx.showLoading({
       title: '保存中',
@@ -315,8 +318,9 @@ Page({
           })
         }
       })
-    }, 5000)
+    }, 4000)
   },
+  //生成海报
   generatePoster() {
     let that = this;
     const query = wx.createSelectorQuery()
@@ -354,8 +358,8 @@ Page({
         setTimeout(() => {
           ctx.font = "16px";
           ctx.fillStyle = '#FF470D';
-          ctx.fillText('小虫科技企业专属邀请码', 95, 70);
-          ctx.fillText('Z7838K', 153, 95);
+          ctx.fillText(this.data.codeText, (bg.width / 2 - ctx.measureText(this.data.codeText).width) / 2, 70)
+          ctx.fillText(this.data.inviteCode, 153, 95);
         }, 100)
         // 生成 二维码
         setTimeout(() => {
@@ -426,5 +430,18 @@ Page({
         //   })
         // }, 5000)
       })
+  },
+  copyBtn() {
+    let that = this;
+    wx.setClipboardData({//复制文本
+      data: that.data.inviteCode,
+      success: function (res) {
+        wx.showToast({
+          title: '复制成功',
+          icon: "none",
+          mask: "true"//是否设置点击蒙版，防止点击穿透
+        })
+      }
+    })
   }
 })

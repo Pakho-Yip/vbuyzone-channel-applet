@@ -57,7 +57,7 @@
 .qrcode {
   /* width: 250rpx;
   height: 250rpx; */
-  margin-top: 794rpx;
+  /* margin-top: 794rpx; */
   /* position: absolute;
   top: 413rpx; */
 }
