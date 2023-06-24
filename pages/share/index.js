@@ -13,6 +13,7 @@ Page({
     showModalStatus: false,
     sharelink: "https://www.fenhuijie.com/vbuyzone-fenhuijie-web/appDow.html",
     localCodeUrl: '', //绘制的二维码图片本地路径
+    saveFilePath: '',
     list: [{
       name: "小虫科技",
       isCheck: false
@@ -41,7 +42,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getQrcode();
+    this.getQrcode();
     // this.getInviteCodes();
     // this.getImginfo(this.data.sharelink, 1)
   },
@@ -73,132 +74,62 @@ Page({
   // },
 
 
-  onShow() {
-    wx.createSelectorQuery()
-      .select('#myCanvas') // 在 WXML 中填入的 id
-      .fields({ node: true, size: true })
-      .exec((res) => {
-        console.log(res)
-        // Canvas 对象
-        const canvas = res[0].node
-        // 渲染上下文
-        const ctx = canvas.getContext('2d')
+  // onShow() {
+  //   wx.createSelectorQuery()
+  //     .select('#myCanvas') // 在 WXML 中填入的 id
+  //     .fields({ node: true, size: true })
+  //     .exec((res) => {
+  //       console.log(res)
+  //       // Canvas 对象
+  //       const canvas = res[0].node
+  //       // 渲染上下文
+  //       const ctx = canvas.getContext('2d')
 
-        // Canvas 画布的实际绘制宽高
-        const width = res[0].width
-        const height = res[0].height
+  //       // Canvas 画布的实际绘制宽高
+  //       const width = res[0].width
+  //       const height = res[0].height
 
+  //       // 初始化画布大小
+  //       const dpr = wx.getWindowInfo().pixelRatio
+  //       canvas.width = width * dpr
+  //       canvas.height = height * dpr
+  //       ctx.scale(dpr, dpr)
 
-        // 初始化画布大小
-        const dpr = wx.getWindowInfo().pixelRatio
-        canvas.width = width * dpr
-        canvas.height = height * dpr
-        ctx.scale(dpr, dpr)
+  //       new Promise(() => {
+  //         const bg = canvas.createImage()
+  //         bg.src = '../../assets/images/share/bg_share_poster_bg.png'
+  //         bg.onload = () => {
+  //           ctx.drawImage(bg, 0, 0, 366, 651)
+  //         }
 
+  //       }).then(() => {
 
-        setTimeout(() => {
+  //       })
 
-          const query = wx.createSelectorQuery()
-          query.select('#myCanvas')
-            .fields({
-              node: true,
-              size: true
-            })
-            .exec((res) => {
-              var canvas = res[0].node
+  //       setTimeout(() => {
+  //         ctx.font = "16px";
+  //         ctx.fillStyle = '#FF470D';
+  //         ctx.fillText('小虫科技企业专属邀请码', 95, 70);
+  //         ctx.fillText('Z7838K', 153, 95);
+  //       }, 100)
 
-              //调用方法drawQrcode生成二维码
-              drawQrcode({
-                canvas: canvas,
-                canvasId: 'myQrcode',
-                width: 130,
-                padding: 0,
-                background: '#ffffff',
-                foreground: '#000000',
-                text: this.data.sharelink,
-              })
-
-              //获取临时路径（得到之后，想干嘛就干嘛了）
-              wx.canvasToTempFilePath({
-                canvasId: 'myQrcode',
-                canvas: canvas,
-                x: 0,
-                y: 0,
-                width: 130,
-                height: 130,
-                destWidth: 130,
-                destHeight: 130,
-                success(res) {
-                  // console.log('二维码临时路径：', res.tempFilePath)
-                },
-                fail(res) {
-                  console.error(res)
-                }
-              })
-            })
+  //       // 生成图片
+  //       wx.canvasToTempFilePath({
+  //         canvas,
+  //         success: res => {
+  //           // 生成的图片临时文件路径
+  //           this.setData({
+  //             tempFilePath: res.tempFilePath
+  //           })
+  //         },
+  //       })
+  //     })
+  // },
 
 
-        }, 100)
-
-
-        new Promise(() => {
-          const bg = canvas.createImage()
-          bg.src = '../../assets/images/share/bg_share_poster_bg.png'
-          bg.onload = () => {
-            ctx.drawImage(bg, 0, 0, 366, 651)
-          }
-
-        }).then(() => {
-
-        })
-
-        // ctx.font = "16px";
-        // ctx.fillStyle = '#FF470D';
-        // ctx.fillText('小虫科技企业专属邀请码', 95, 51);
-        // setTimeout(() => {
-
-        //   const qrcode = canvas.createImage()
-        //   // qrcode.src = '../../assets/images/share/bg_share_poster_bg.png'
-        //   qrcode.onload = () => {
-        //     ctx.drawImage(this.data.sharelink, 0, 0, 366, 651)
-        //   }
-        //   // ctx.drawImage(this.data.sharelink, 0, 0, 366, 651);
-        // }, 100)
-
-        setTimeout(() => {
-          ctx.font = "16px";
-          ctx.fillStyle = '#FF470D';
-          ctx.fillText('小虫科技企业专属邀请码', 95, 70);
-          ctx.fillText('Z7838K', 153, 95);
-        }, 100)
-        // ctx.restore();
-        // ctx.save();
-        // ctx.fillStyle = fillStyle;
-        // ctx.font = font;
-        // ctx.fillText('妖妖灵2222222222', 100, 60);
-        // ctx.restore();
-
-        // 绘制红色正方形
-        // ctx.fillStyle = 'rgb(200, 0, 0)';
-        // ctx.fillRect(10, 10, 50, 50);
-
-        // 绘制蓝色半透明正方形
-        // ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
-        // ctx.fillRect(30, 30, 50, 50);
-
-        // 生成图片
-        wx.canvasToTempFilePath({
-          canvas,
-          success: res => {
-            // 生成的图片临时文件路径
-            this.setData({
-              tempFilePath: res.tempFilePath
-            })
-          },
-        })
-      })
+  onShow: function () {
+    this.generatePoster()
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -257,6 +188,7 @@ Page({
         })
 
         // 获取临时路径（得到之后，想干嘛就干嘛了）
+        let that = this;
         wx.canvasToTempFilePath({
           canvasId: 'myQrcode',
           canvas: canvas,
@@ -267,7 +199,10 @@ Page({
           destWidth: 130,
           destHeight: 130,
           success(res) {
-            // console.log('二维码临时路径：', res.tempFilePath)
+            console.log('二维码临时路径：', res.tempFilePath)
+            that.setData({ //二维码
+              localCodeUrl: res.tempFilePath,
+            })
           },
           fail(res) {
             console.error(res)
@@ -376,5 +311,124 @@ Page({
         // resolve();
       }
     })
+  },
+  generatePoster() {
+    let that = this;
+    const query = wx.createSelectorQuery()
+    query.select('#myCanvas')
+      .fields({
+        node: true,
+        size: true
+      })
+      .exec((res) => {
+        const canvas = res[0].node
+        const ctx = canvas.getContext('2d')
+        // 获取像素比
+        const dpr = wx.getSystemInfoSync().pixelRatio
+        // 将画布大小按照设备像素比例进行调整，使其在不同设备上显示的效果更加一致。
+        canvas.width = res[0].width * dpr
+        canvas.height = res[0].height * dpr
+        ctx.scale(dpr, dpr)
+        // 设置背景图片
+        const bg = canvas.createImage()
+        bg.src = '../../assets/images/share/bg_share_poster_bg.png'
+        bg.onload = () => {
+          ctx.drawImage(bg, 0, 0, 366, 651)
+        }
+        // 绘制 底部 盒子
+        // ctx.fillStyle = '#f0f0f0'
+        // ctx.fillRect(0, 400, 500, 100)
+        // ctx.fill()
+        // 设置 字体
+        // ctx.fillStyle = '#000'
+        // ctx.font = "16px 楷体"
+        // ctx.fillText('11111111111hhhhh', 12, 12)
+        // ctx.fill()
+        ctx.restore()
+        ctx.save()
+        setTimeout(() => {
+          ctx.font = "16px";
+          ctx.fillStyle = '#FF470D';
+          ctx.fillText('小虫科技企业专属邀请码', 95, 70);
+          ctx.fillText('Z7838K', 153, 95);
+        }, 100)
+        // 生成 二维码
+        setTimeout(() => {
+          const code = canvas.createImage()
+          code.src = this.data.localCodeUrl
+          code.onload = () => {
+            ctx.drawImage(code, 118, 413, 130, 130)
+          }
+        }, 1000)
+        that.setData({
+          canvas: canvas
+        })
+
+
+        // // 生成图片
+        // wx.canvasToTempFilePath({
+        //   canvas,
+        //   success: res => {
+        //     console.log(res.tempFilePath)
+        //     // 生成的图片临时文件路径
+        //     that.setData({
+        //       saveFilePath: res.tempFilePath
+        //     })
+        //   },
+        // })
+
+
+
+
+
+
+        // setTimeout(() => {
+
+        //   wx.saveImageToPhotosAlbum({
+        //     filePath: that.data.saveFilePath,
+        //     success: (result) => {
+        //       wx.showToast({
+        //         title: '海报已保存，快去分享给好友吧。',
+        //         icon: 'none'
+        //       })
+        //     },
+        //     fail: (e) => {
+        //       console.log(e)
+        //     }
+        //     // })
+        //   })
+        // }, 5000)
+
+
+        setTimeout(() => {
+          wx.canvasToTempFilePath({
+            canvas: this.data.canvas, // canvas 实例
+            success(res) {
+              console.log(res);
+              // canvas 生成图片成功
+              wx.saveImageToPhotosAlbum({
+                filePath: res.tempFilePath,
+                success(res) {
+                  // 保存成功
+                  wx.showToast({
+                    title: '已保存相册',
+                    icon: 'success',
+                    duration: 2000
+                  })
+                }
+              })
+            }
+          })
+        }, 5000)
+
+
+
+
+
+      })
+
+
+
+
   }
 })

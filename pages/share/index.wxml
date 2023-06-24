@@ -25,7 +25,7 @@
       </view>
       <view class="share-item fb-row-center item-flex-1">
         <image class="shareImg" src="../../assets/images/share/icon_share_save.png" mode="widthFix" lazy-load></image>
-        <text class="share-text">保存图片</text>
+        <text class="share-text" bindtap="generatePoster">保存图片</text>
       </view>
       <view class="share-item fb-row-center item-flex-1">
         <image class="shareImg" src="../../assets/images/share/icon_share_copy.png" mode="widthFix" lazy-load></image>
