@@ -187,7 +187,7 @@ Page({
           text: this.data.sharelink,
         })
 
-        // 获取临时路径（得到之后，想干嘛就干嘛了）
+        // 获取临时路径
         let that = this;
         wx.canvasToTempFilePath({
           canvasId: 'myQrcode',
@@ -284,33 +284,27 @@ Page({
 
 
   },
-
-  getImginfo: function (urlArr, _type) {
-    console.log("11111111111")
-    let that = this;
-    wx.getImageInfo({
-      src: that.data.sharelink,
-      success: function (res) {
-        console.log(res)
-        //res.path 是网络图片的本地地址
-        // if (_type === 0) { //商品图片
-        //   that.setData({
-        //     localImageUrl: res.path,
-        //   })
-        //   that.getImginfo(urlArr, 1)
-        // } else {
-        that.setData({ //二维码
-          localCodeUrl: res.path,
-        })
-        // }
-      },
-      fail: function (e) {
-        console.log(e)
-        // 获取logo失败也不应该影响正确生成二维码图片
-        // 这里可以给出失败提示
-        // resolve();
-      }
-    })
+  savePoster() {
+    setTimeout(() => {
+      wx.canvasToTempFilePath({
+        canvas: this.data.canvas, // canvas 实例
+        success(res) {
+          console.log(res);
+          // canvas 生成图片成功
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+            success(res) {
+              // 保存成功
+              wx.showToast({
+                title: '已保存相册',
+                icon: 'success',
+                duration: 2000
+              })
+            }
+          })
+        }
+      })
+    }, 5000)
   },
   generatePoster() {
     let that = this;
@@ -400,35 +394,26 @@ Page({
         // }, 5000)
 
 
-        setTimeout(() => {
-          wx.canvasToTempFilePath({
-            canvas: this.data.canvas, // canvas 实例
-            success(res) {
-              console.log(res);
-              // canvas 生成图片成功
-              wx.saveImageToPhotosAlbum({
-                filePath: res.tempFilePath,
-                success(res) {
-                  // 保存成功
-                  wx.showToast({
-                    title: '已保存相册',
-                    icon: 'success',
-                    duration: 2000
-                  })
-                }
-              })
-            }
-          })
-        }, 5000)
-
-
-
-
-
+        // setTimeout(() => {
+        //   wx.canvasToTempFilePath({
+        //     canvas: this.data.canvas, // canvas 实例
+        //     success(res) {
+        //       console.log(res);
+        //       // canvas 生成图片成功
+        //       wx.saveImageToPhotosAlbum({
+        //         filePath: res.tempFilePath,
+        //         success(res) {
+        //           // 保存成功
+        //           wx.showToast({
+        //             title: '已保存相册',
+        //             icon: 'success',
+        //             duration: 2000
+        //           })
+        //         }
+        //       })
+        //     }
+        //   })
+        // }, 5000)
       })
-
-
-
-
   }
 })
