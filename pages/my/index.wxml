@@ -1,47 +1,28 @@
 <!--pages/my/index.wxml-->
-<view>
-  <view class="fb h-124 fb-main-between w-full headTop" style="padding:20rpx 0;">
-    <view class="fb h-124 fb-main-between w-full">
-      <view class="fb fb-row head-wrap">
-        <view class="w-115 bd-radio-50 relative">
-          <open-data class="bd-radio-50 absolute w-115 h-115 headImg" type="userAvatarUrl"></open-data>
-          <!-- <button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> -->
-          <!-- <image class="absolute head-bgc" src="../../assets/images/headwrap.png"></image> -->
-        </view>
-        <!-- <view class="ml-32 fb fb-col relative" wx:if="{{loginStatus}}">
-          <view class="font-32 c-3D3D3D text-blod h-60 mt-10 text-ellipsis " style="max-width:340rpx">
-            {{name}}
-          </view>
-          <view class="absolute {{identityAuthState=='AUTHED'&&truckAuthState=='AUTHED'?'':'grayscale'}}" style="right:10rpx;top:18rpx">
-            <image class="w-34 h-34" src="../../assets/images/hy.png"></image>
-          </view>
-          <view class="mt-8 font-20 bg-hy bd-radio-14 text-center c-FFF0F0 relative" style="height:28rpx;width:140rpx;line-height:28rpx">
-            <view>
-              {{mobile}}
-            </view>
-          </view>
-        </view> -->
-        <view class="ml-32 mt-115 fb fb-cross-center" bindtap="handleLogin" wx:if="{{!loginStatus}}">
-          <view class="font-31 c-FFFFFF fw-500">
-            立即登录
-          </view>
-        </view>
-        <view class="ml-32 mt-115 fb fb-cross-center" wx:else bindtap="handleLogin" wx:else>
-          <view class="font-31 c-FFFFFF fw-500">
-            <open-data class="" type="userNickName"></open-data>
-          </view>
-        </view>
+<view class="page">
+  <image class="headtop" style="width: 750rpx;height: 92rpx;" src="../../assets/images/my/bg_personal_bg.png" mode="widthFix" lazy-load></image>
+  <view class="headtop-info fb-row-center" style="justify-content: flex-start;">
+    <open-data style="margin-left: 23rpx;" class="bd-radio-50 absolute w-115 h-115 headImg" type="userAvatarUrl"></open-data>
+    <!-- <button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> -->
+    <!-- <image class="absolute head-bgc" src="../../assets/images/headwrap.png"></image> -->
+
+    <view style="margin-left: 166rpx;" bindtap="handleLogin" wx:if="{{!loginStatus}}">
+      <view class="font-32 c-FFFFFF fw-500">
+        立即登录
       </view>
-      <view class="mt-18 bd-radio-12 w-160 h-44 fb fb-main-center fb-cross-center bd-FFAFAF" wx:if="{{loginStatus}}">
-        <view class="fb-center">
-          <image class="w-24 h-24" src="../../assets/images/out.png"></image>
-        </view>
-        <view class="font-24 ml-4 fb c-FFA3A3" bindtap="handleOut">
-          退出登录
-        </view>
+    </view>
+    <view style="margin-left: 166rpx;" wx:else>
+      <view class="font-32 c-FFFFFF fw-500">
+        <open-data class="" type="userNickName"></open-data>
+      </view>
+    </view>
+    <view class="ml-32 mt-18 bd-radio-12 w-160 h-44 fb fb-main-center fb-cross-center bd-FFAFAF" wx:if="{{loginStatus}}">
+      <view class="font-24 ml-4 fb c-FFFFFF" bindtap="handleOut">
+        退出登录
       </view>
     </view>
   </view>
+
   <view class="fb-col-center" wx:if="{{!loginStatus}}">
     <image class="noLogin" src="../../assets/images/my/icon_login_nomessage.png" mode="widthFix" lazy-load></image>
     <view class="noLogin-text">

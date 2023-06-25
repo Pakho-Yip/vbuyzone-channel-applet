@@ -36,14 +36,14 @@
 }
 
 .color_yellow {
-  color:#AE8958
+  color: #AE8958
 }
 
 .color_blue {
   color: #3690C1
 }
 
-.color_red{
+.color_red {
   color: #D12325;
 }
 
