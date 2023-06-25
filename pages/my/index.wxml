@@ -5,9 +5,10 @@
       <view class="fb fb-row head-wrap">
         <view class="w-115 bd-radio-50 relative">
           <open-data class="bd-radio-50 absolute w-115 h-115 headImg" type="userAvatarUrl"></open-data>
+          <!-- <button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> -->
           <!-- <image class="absolute head-bgc" src="../../assets/images/headwrap.png"></image> -->
         </view>
-        <view class="ml-32 fb fb-col relative" wx:if="{{loginStatus}}">
+        <!-- <view class="ml-32 fb fb-col relative" wx:if="{{loginStatus}}">
           <view class="font-32 c-3D3D3D text-blod h-60 mt-10 text-ellipsis " style="max-width:340rpx">
             {{name}}
           </view>
@@ -19,10 +20,15 @@
               {{mobile}}
             </view>
           </view>
-        </view>
-        <view class="ml-32 mt-115 fb fb-cross-center" wx:else bindtap="handleLogin">
+        </view> -->
+        <view class="ml-32 mt-115 fb fb-cross-center" bindtap="handleLogin" wx:if="{{!loginStatus}}">
           <view class="font-31 c-FFFFFF fw-500">
             立即登录
+          </view>
+        </view>
+        <view class="ml-32 mt-115 fb fb-cross-center" wx:else bindtap="handleLogin" wx:else>
+          <view class="font-31 c-FFFFFF fw-500">
+            <open-data class="" type="userNickName"></open-data>
           </view>
         </view>
       </view>
@@ -36,7 +42,7 @@
       </view>
     </view>
   </view>
-  <view class="fb-col-center">
+  <view class="fb-col-center" wx:if="{{!loginStatus}}">
     <image class="noLogin" src="../../assets/images/my/icon_login_nomessage.png" mode="widthFix" lazy-load></image>
     <view class="noLogin-text">
       暂时没有获得更多信息

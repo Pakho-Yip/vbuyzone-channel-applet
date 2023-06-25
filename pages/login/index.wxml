@@ -4,24 +4,28 @@
     <!-- <image style="width:100%;height:100%;" src="../../assets/images/login_bg_miao_nor.png" mode='aspectFill'></image> -->
     <image class="loginhead" src="../../assets/images/login_bg_miao_nor.png" mode="widthFix" lazy-load></image>
     <view class="closeIcon" bindtap="handleReturn">
-      <image style='width: 48rpx;height:48rpx;' src="../../assets/images/login_icon_close_nor.png" mode="widthFix" lazy-load></image>
+      <image style='width: 48rpx;height:48rpx;' src="../../assets/images/login_icon_close_nor.png" mode="widthFix"
+        lazy-load></image>
     </view>
     <!-- <view class="content">
       <view class="bgfff"> -->
     <view class="content scroll">
       <view class="">
         <!-- 是平台用户 -->
-        <view wx:if="{{true}}">
+        <view wx:if="{{isChannel}}">
           <view class="chooseTop">
             <view wx:if="{{radioFlag == false}}" class="fb fb-main-center fb-cross-center">
               <button class="button" style="width: 83.5vw;" bindtap="handleAgree">
-                <image style="width: 46.15rpx;height: 46.15rpx" class="weixin-logo" src="../../assets/images/login_icon_wechat_nor.png" />
+                <image style="width: 46.15rpx;height: 46.15rpx" class="weixin-logo"
+                  src="../../assets/images/login_icon_wechat_nor.png" />
                 微信登录
               </button>
             </view>
             <view wx:else="" class="fb fb-main-center fb-cross-center">
-              <button class="button" style="width: 83.5vw;" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
-                <image style="width: 46.15rpx;height: 46.15rpx" class="weixin-logo" src="../../assets/images/login_icon_wechat_nor.png" />
+              <button class="button" style="width: 83.5vw;" open-type="getPhoneNumber"
+                bindgetphonenumber="getPhoneNumber">
+                <image style="width: 46.15rpx;height: 46.15rpx" class="weixin-logo"
+                  src="../../assets/images/login_icon_wechat_nor.png" />
                 微信登录
               </button>
             </view>
@@ -40,10 +44,11 @@
           </view>
         </view>
         <!-- 不是平台用户 -->
-        <view wx:if="{{false}}" class="fb fb-col fb-main-center fb-cross-center" style="margin-bottom: 124rpx;">
+        <view wx:else class="fb fb-col fb-main-center fb-cross-center" style="margin-bottom: 124rpx;">
           <image style="width:230.77rpx;height:230.77rpx;" src="../../assets/images/icon_login_notauser.png"></image>
           <text class="font-23 c-5E6B84">您还不是平台用户</text>
-          <image style="width:703.85rpx;height:884.62rpx;margin-top: 30.77rpx;" src="../../assets/images/pic_eguity_income.png"></image>
+          <image style="width:703.85rpx;height:884.62rpx;margin-top: 30.77rpx;"
+            src="../../assets/images/pic_eguity_income.png"></image>
           <view class="contact-style fb fb-col fb-main-center fb-cross-center">
             <!-- <image class="loginline-style" style="width:703.85rpx;height:884.62rpx;margin-top: 30.77rpx;" src="../../assets/images/bg_login_line.png"></image> -->
             <text class="font-27 c-1F2635 contact-title">若您愿意获得更高的睡后躺赚收益， 留下您的联系方式，以便我们联系您。</text>
@@ -69,7 +74,9 @@
                   申请理由
                 </view>
                 <view style="width: 458rpx;">
-                  <textarea value="{{applyReasons}}" bindinput="reasonInput" placeholder="您可以在这里描述您可以邀请进入内购福利的企业/社区/学校的名称及对应的人数，方便您更快速的成为我们的代理合伙人" style="width: 425rpx;height: 240rpx;margin-top: 45rpx;margin-bottom: 45rpx;" maxlength="-1" />
+                  <textarea value="{{applyReasons}}" bindinput="reasonInput"
+                    placeholder="您可以在这里描述您可以邀请进入内购福利的企业/社区/学校的名称及对应的人数，方便您更快速的成为我们的代理合伙人"
+                    style="width: 425rpx;height: 240rpx;margin-top: 45rpx;margin-bottom: 45rpx;" maxlength="-1" />
                 </view>
               </view>
             </view>

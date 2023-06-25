@@ -4,7 +4,8 @@ import http from "../../api/httpUtils"
 import Url from "../../api/url"
 import {
   wxRequestCode,
-  wxToast
+  wxToast,
+  wxReLaunch
 } from '../../api/wxSdkUtils'
 Page({
 
@@ -152,7 +153,9 @@ Page({
     http.post(Url.login.login, param).then(res => {
       if (res.token) {
         wx.setStorageSync('tokenId', res.token);
-        wx.setStorageSync('mobile', res.mobile);
+        wx.setStorageSync('linkMobileNumber', res.linkMobileNumber);
+        wx.setStorageSync('channelAgentId', res.channelAgentId);
+        wx.setStorageSync('channelAgentName', res.channelAgentName);
         this.getOssInfo();
         this.setData({
           loginStatus: true
@@ -266,7 +269,7 @@ Page({
         var code = code;
         app.globalData.jscode = code;
       })
-      //wxReLaunch("../my/index")
+      wxReLaunch("../my/index")
     }).catch(_ => {
       wx.clearStorage()
       wxToast({
@@ -275,7 +278,7 @@ Page({
       this.setData({
         loginStatus: false
       })
-      //wxReLaunch("../my/index")
+      wxReLaunch("../my/index")
     })
   }
 })
