@@ -44,7 +44,7 @@ Page({
    */
   onLoad: function (options) {
     this.getQrcode();
-    // this.getInviteCodes();
+    this.getInviteCodes();
     // this.getImginfo(this.data.sharelink, 1)
   },
 
@@ -213,8 +213,10 @@ Page({
   },
   //查询渠道商所有邀请码
   getInviteCodes() {
+    let channelAgentId = wx.getStorageSync('channelAgentId');
+    console.log(channelAgentId)
     let param = {};
-    param.channelAgentId = "1111";
+    param.channelAgentId = channelAgentId;
     console.log(param);
     http.get(Url.share.queryInviteCode, param).then(res => {
       console.log(res)

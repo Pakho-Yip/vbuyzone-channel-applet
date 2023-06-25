@@ -3,7 +3,6 @@ import http from "../../api/httpUtils"
 import Url from "../../api/url"
 const app = getApp()
 import {
-  wxRequestCode,
   wxToast,
   wxReLaunch,
   wxNavigateTo
@@ -22,28 +21,8 @@ Page({
     confState: true
   },
   onLoad: function (options) {
-    // wxRequestCode().then(code => {
-    //   console.log(code);
-    //   var code = code;
-    //   app.globalData.jscode = code;
-    // })
   },
-  getInfo() {
-    http.post(Url.common.driverAuth).then(res => {
-      if (res) {
-        let driverName = res.driverName || '司机名';
-        let identityAuthState = res.identityAuthState;
-        let truckAuthState = res.truckAuthState;
-        let haveSignedAgreement = res.haveSignedAgreement;
-        this.setData({
-          name: driverName,
-          identityAuthState: identityAuthState,
-          truckAuthState: truckAuthState,
-          haveSignedAgreement: haveSignedAgreement
-        })
-      }
-    })
-  },
+
 
 
 
@@ -95,7 +74,6 @@ Page({
     //     this.setData({
     //       loginStatus:true
     //     })
-    //     this.getInfo();
     //     this.refreshData();
     //     this.getWxVersion();
     //     wxToast({
@@ -110,13 +88,6 @@ Page({
     //     wxReLaunch(`../token/index`)
     //   }
     // }).catch(err =>{
-    //   wxRequestCode().then(code => {
-    //     console.log(code);
-    //     var code = code;
-    //     //wx.setStorageSync('code', code)
-    //     app.globalData.jscode = code;
-    //     //that.handleLogin();
-    //   })
     // })
 
   },
@@ -132,6 +103,17 @@ Page({
   },
   onShow: function () {
     let that = this;
+    console.log(wx.getStorageSync('tokenId'))
+    if (wx.getStorageSync('tokenId')) {
+      that.setData({
+        loginStatus: true
+      })
+    } else {
+      that.setData({
+        loginStatus: false
+      })
+    }
+    console.log(that.data.loginStatus)
     // this.getWxVersion();
     // if (!wx.getStorageSync('tokenId')) {
     //   that.setData({
@@ -152,7 +134,6 @@ Page({
     // this.setData({
     //   loginStatus: true
     // })
-    // this.getInfo();
     // this.refreshData();
   },
   getWxVersion() {
@@ -179,7 +160,6 @@ Page({
       return;
     }
     this.refreshData();
-    this.getInfo();
     // this.getWxVersion();
   },
   handleOut() {
@@ -191,23 +171,16 @@ Page({
       this.setData({
         loginStatus: false
       })
-      wxRequestCode().then(code => {
-        console.log(code);
-        var code = code;
-        app.globalData.jscode = code;
-      })
-      //wxReLaunch("../my/index")
+      wxReLaunch("../my/index")
     }).catch(_ => {
       wx.clearStorage()
-
       wxToast({
         title: '退出成功'
       })
       this.setData({
         loginStatus: false
       })
-      //wxReLaunch("../my/index")
+      wxReLaunch("../my/index")
     })
   },
-
 })

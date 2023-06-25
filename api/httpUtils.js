@@ -4,23 +4,23 @@ import {
 } from './wxSdkUtils'
 const app = getApp();
 console.log(app)
-function loginOut(){
+function loginOut() {
   wx.showModal({
     title: '提示',
-    showCancel:false,
+    showCancel: false,
     content: '会话过期, 重新登录!',
-    success () {
+    success() {
       wx.removeStorage({
         key: 'tokenId',
         success() {
-           wxRequestCode().then(code => {
+          wxRequestCode().then(code => {
             console.log(code);
             var code = code;
             app.globalData.jscode = code;
-            wx.switchTab({
-              url: '/pages/my/index'
+            wx.reLaunch({
+              url: '/pages/my/index',
             })
-          })         
+          })
         }
       })
     }
@@ -55,13 +55,13 @@ function httpGet(url, data) {
           // 登录失效时 重新跳转到登录页
           loginOut();
         } else {
-          if(res.errMsg && res.errMsg.length>7){
+          if (res.errMsg && res.errMsg.length > 7) {
             wx.showModal({
               title: '提示',
-              showCancel:false,
+              showCancel: false,
               content: res.errorMsg,
             })
-          }else{
+          } else {
             wxToast({
               title: res.errorMsg,
               icon: "none"
@@ -73,8 +73,8 @@ function httpGet(url, data) {
       fail: function (res) {
         res = res.data
         if (res && res.errorCode == '#401') {
-        // 登录失效时 重新跳转到登录页
-        loginOut();
+          // 登录失效时 重新跳转到登录页
+          loginOut();
         } else {
           wxToast({
             title: res.errorMsg,
@@ -91,7 +91,7 @@ function httpGet(url, data) {
 }
 
 // showLoading: 默认不加载loading 传值: 1 加载头部 2 加载mask loading
-function httpPost(url, data, showLoading,showError=true) {
+function httpPost(url, data, showLoading, showError = true) {
   if (showLoading == 1) {
     wx.showNavigationBarLoading()
   }
@@ -123,13 +123,13 @@ function httpPost(url, data, showLoading,showError=true) {
             if (res.errorCode == '#401') {
               loginOut();
             } else {
-              if(res.errMsg && res.errMsg.length>7){
+              if (res.errMsg && res.errMsg.length > 7) {
                 wx.showModal({
                   title: '提示',
-                  showCancel:false,
+                  showCancel: false,
                   content: res.errorMsg,
                 })
-              }else{
+              } else {
                 wxToast({
                   title: res.errorMsg,
                   icon: "none"
@@ -142,14 +142,14 @@ function httpPost(url, data, showLoading,showError=true) {
           // 登录失效时 重新跳转到登录页
           loginOut();
         } else {
-          if(showError){
-            if(res.errMsg && res.errMsg.length>7){
+          if (showError) {
+            if (res.errMsg && res.errMsg.length > 7) {
               wx.showModal({
                 title: '提示',
-                showCancel:false,
+                showCancel: false,
                 content: res.errorMsg,
               })
-            }else{
+            } else {
               wxToast({
                 title: res.errorMsg,
                 icon: "none"
@@ -165,14 +165,14 @@ function httpPost(url, data, showLoading,showError=true) {
           // 登录失效时 重新跳转到登录页
           loginOut();
         } else {
-          if(showError){
-            if(res.errMsg && res.errMsg.length>7){
+          if (showError) {
+            if (res.errMsg && res.errMsg.length > 7) {
               wx.showModal({
                 title: '提示',
-                showCancel:false,
+                showCancel: false,
                 content: res.errorMsg,
               })
-            }else{
+            } else {
               wxToast({
                 title: res.errorMsg,
                 icon: "none"

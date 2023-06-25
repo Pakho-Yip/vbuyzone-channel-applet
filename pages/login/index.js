@@ -3,7 +3,6 @@ const app = getApp()
 import http from "../../api/httpUtils"
 import Url from "../../api/url"
 import {
-  wxRequestCode,
   wxToast,
   wxReLaunch
 } from '../../api/wxSdkUtils'
@@ -25,20 +24,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    wx.getSystemInfo({
-      success: function (res) {
-        let version = res.SDKVersion;
-        version = version.replace(/\./g, "");
-        console.log('当前版本号: ' + version);
-      }
-    });
-
-    wxRequestCode().then(code => {
-      console.log(code);
-      var code = code;
-      app.globalData.jscode = code;
-    })
     // wx.login({
     //   success: res => {
     //     // resolve(res.code)
@@ -156,13 +141,10 @@ Page({
         wx.setStorageSync('linkMobileNumber', res.linkMobileNumber);
         wx.setStorageSync('channelAgentId', res.channelAgentId);
         wx.setStorageSync('channelAgentName', res.channelAgentName);
-        this.getOssInfo();
         this.setData({
           loginStatus: true
         })
-        this.getInfo();
-        this.refreshData();
-        this.getWxVersion();
+        console.log(this.data.loginStatus)
         wxToast({
           title: '登录成功'
         });
@@ -182,11 +164,10 @@ Page({
         // wxReLaunch(`../token/index`)
       }
     }).catch(err => {
-      wxRequestCode().then(code => {
-        console.log(code);
-        var code = code;
-        app.globalData.jscode = code;
-      })
+      wxToast({
+        title: '登录失败',
+        icon: 'none'
+      });
     })
   },
   linkManInput(e) {
@@ -263,11 +244,6 @@ Page({
       })
       this.setData({
         loginStatus: false
-      })
-      wxRequestCode().then(code => {
-        console.log(code);
-        var code = code;
-        app.globalData.jscode = code;
       })
       wxReLaunch("../my/index")
     }).catch(_ => {
