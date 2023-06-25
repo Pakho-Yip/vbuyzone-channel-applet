@@ -16,7 +16,8 @@ Page({
     code: "",
     linkMan: "",
     linkMobileNumber: "",
-    applyReasons: ""
+    applyReasons: "",
+    isChannel: true
   },
 
   /**
@@ -169,9 +170,13 @@ Page({
         let weixinId = res.weixinId;
         app.globalData.weixinId = weixinId;
         wxToast({
-          title: '暂未注册，请完成注册！'
+          title: '暂未注册，请填写信息！',
+          icon: 'none'
         })
-        wxReLaunch(`../token/index`)
+        this.setData({
+          isChannel: false
+        })
+        // wxReLaunch(`../token/index`)
       }
     }).catch(err => {
       wxRequestCode().then(code => {
@@ -228,9 +233,23 @@ Page({
     param.applyReasons = this.data.applyReasons;
     console.log(param);
     http.post(Url.login.channelAgentApply, param).then(res => {
-      console.log(res)
+      if (res) {
+        wxToast({
+          title: '提交成功',
+          duration: 2000
+        })
+        setTimeout(() => {
+          wx.switchTab({
+            url: '../my/index'
+          });
+        }, 2000)
+      }
     }).catch(err => {
       console.log(err)
+      wxToast({
+        title: '提交失败',
+        icon: 'none'
+      })
     })
   },
   signOut() {
