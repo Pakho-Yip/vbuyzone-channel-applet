@@ -10,7 +10,7 @@ Page({
     loginStatus: false,
     animationData: {},
     showModalStatus: false,
-    sharelink: "https://www.fenhuijie.com/vbuyzone-fenhuijie-web/appDow.html",
+    // sharelink: "https://www.fenhuijie.com/vbuyzone-fenhuijie-web/appDow.html",
     localCodeUrl: '', //绘制的二维码图片本地路径
     localIosCodeUrl: '',//ios绘制的二维码图片本地路径
     saveFilePath: '',
@@ -82,12 +82,12 @@ Page({
       })
       return;
     } else {
-      if (that.data.systemInfo.platform == 'android') {
-        that.getQrcode();
-      } else {
-        that.getQrcode();
-        that.getIosQrcode();
-      }
+      // if (that.data.systemInfo.platform == 'android') {
+      //   that.getQrcode();
+      // } else {
+      //   that.getQrcode();
+      //   that.getIosQrcode();
+      // }
       that.getInviteCodes();
       that.setData({
         loginStatus: true
@@ -139,43 +139,83 @@ Page({
         size: true
       })
       .exec((res) => {
-        var canvas = res[0].node
+        if (this.data.invitationCode) {
+          var canvas = res[0].node;
 
-        // 调用方法drawQrcode生成二维码
-        drawQrcode({
-          canvas: canvas,
-          canvasId: 'myQrcode',
-          // width: 130,
-          // padding: 0,
-          background: '#ffffff',
-          foreground: '#000000',
-          text: this.data.sharelink,
-        })
+          // 调用方法drawQrcode生成二维码
+          drawQrcode({
+            canvas: canvas,
+            canvasId: 'myQrcode',
+            // width: 130,
+            // padding: 0,
+            background: '#ffffff',
+            foreground: '#000000',
+            text: `https://www.fenhuijie.com/vbuyzone-fenhuijie-web/appDow.html?invitationCode=${this.data.invitationCode}`,
+          })
 
-        // 获取临时路径
-        let that = this;
-        wx.canvasToTempFilePath({
-          canvasId: 'myQrcode',
-          canvas: canvas,
-          x: 0,
-          y: 0,
-          width: 130,
-          height: 130,
-          destWidth: 130,
-          destHeight: 130,
-          success(res) {
-            console.log('二维码临时路径：', res.tempFilePath)
-            that.setData({ //二维码
-              localCodeUrl: res.tempFilePath,
-            })
-            // if (that.data.systemInfo.platform == 'android') {
-            //   that.generatePoster();
-            // }
-          },
-          fail(res) {
-            console.error(res)
-          }
-        })
+          // 获取临时路径
+          let that = this;
+          wx.canvasToTempFilePath({
+            canvasId: 'myQrcode',
+            canvas: canvas,
+            x: 0,
+            y: 0,
+            width: 130,
+            height: 130,
+            destWidth: 130,
+            destHeight: 130,
+            success(res) {
+              console.log('二维码临时路径：', res.tempFilePath)
+              that.setData({ //二维码
+                localCodeUrl: res.tempFilePath,
+              })
+              // if (that.data.systemInfo.platform == 'android') {
+              //   that.generatePoster();
+              // }
+            },
+            fail(res) {
+              console.error(res)
+            }
+          })
+        } else {
+          var canvas = res[0].node;
+
+          // 调用方法drawQrcode生成二维码
+          drawQrcode({
+            canvas: canvas,
+            canvasId: 'myQrcode',
+            // width: 130,
+            // padding: 0,
+            background: '#ffffff',
+            foreground: '#000000',
+            text: `https://www.fenhuijie.com/vbuyzone-fenhuijie-web/appDow.html`,
+          })
+
+          // 获取临时路径
+          let that = this;
+          wx.canvasToTempFilePath({
+            canvasId: 'myQrcode',
+            canvas: canvas,
+            x: 0,
+            y: 0,
+            width: 130,
+            height: 130,
+            destWidth: 130,
+            destHeight: 130,
+            success(res) {
+              console.log('二维码临时路径：', res.tempFilePath)
+              that.setData({ //二维码
+                localCodeUrl: res.tempFilePath,
+              })
+              // if (that.data.systemInfo.platform == 'android') {
+              //   that.generatePoster();
+              // }
+            },
+            fail(res) {
+              console.error(res)
+            }
+          })
+        }
       })
   },
   //生成二维码-ios
@@ -188,41 +228,79 @@ Page({
         size: true
       })
       .exec((res) => {
-        var canvas = res[0].node
+        if (this.data.invitationCode) {
+          var canvas = res[0].node
 
-        // 调用方法drawQrcode生成二维码
-        drawQrcode({
-          canvas: canvas,
-          canvasId: 'myIosQrcode',
-          // width: 130,
-          // padding: 0,
-          background: '#ffffff',
-          foreground: '#000000',
-          text: this.data.sharelink,
-        })
+          // 调用方法drawQrcode生成二维码
+          drawQrcode({
+            canvas: canvas,
+            canvasId: 'myIosQrcode',
+            // width: 130,
+            // padding: 0,
+            background: '#ffffff',
+            foreground: '#000000',
+            text: `https://www.fenhuijie.com/vbuyzone-fenhuijie-web/appDow.html?invitationCode=${this.data.invitationCode}`,
+          })
 
-        // 获取临时路径
-        let that = this;
-        wx.canvasToTempFilePath({
-          canvasId: 'myIosQrcode',
-          canvas: canvas,
-          x: 0,
-          y: 0,
-          width: 130,
-          height: 130,
-          destWidth: 130,
-          destHeight: 130,
-          success(res) {
-            console.log('二维码临时路径：', res.tempFilePath)
-            that.setData({ //二维码
-              localIosCodeUrl: res.tempFilePath,
-            })
-            // that.generatePoster();
-          },
-          fail(res) {
-            console.error(res)
-          }
-        })
+          // 获取临时路径
+          let that = this;
+          wx.canvasToTempFilePath({
+            canvasId: 'myIosQrcode',
+            canvas: canvas,
+            x: 0,
+            y: 0,
+            width: 130,
+            height: 130,
+            destWidth: 130,
+            destHeight: 130,
+            success(res) {
+              console.log('二维码临时路径：', res.tempFilePath)
+              that.setData({ //二维码
+                localIosCodeUrl: res.tempFilePath,
+              })
+              // that.generatePoster();
+            },
+            fail(res) {
+              console.error(res)
+            }
+          })
+        } else {
+          var canvas = res[0].node
+
+          // 调用方法drawQrcode生成二维码
+          drawQrcode({
+            canvas: canvas,
+            canvasId: 'myIosQrcode',
+            // width: 130,
+            // padding: 0,
+            background: '#ffffff',
+            foreground: '#000000',
+            text: `https://www.fenhuijie.com/vbuyzone-fenhuijie-web/appDow.html`,
+          })
+
+          // 获取临时路径
+          let that = this;
+          wx.canvasToTempFilePath({
+            canvasId: 'myIosQrcode',
+            canvas: canvas,
+            x: 0,
+            y: 0,
+            width: 130,
+            height: 130,
+            destWidth: 130,
+            destHeight: 130,
+            success(res) {
+              console.log('二维码临时路径：', res.tempFilePath)
+              that.setData({ //二维码
+                localIosCodeUrl: res.tempFilePath,
+              })
+              // that.generatePoster();
+            },
+            fail(res) {
+              console.error(res)
+            }
+          })
+        }
       })
   },
   //查询渠道商所有邀请码
@@ -239,6 +317,12 @@ Page({
         posterName: res[0].organizationAliasName,
         invitationCode: res[0].invitationCode
       })
+      if (that.data.systemInfo.platform == 'android') {
+        that.getQrcode();
+      } else {
+        that.getQrcode();
+        that.getIosQrcode();
+      }
     }).catch(err => {
       console.log(err)
     })
