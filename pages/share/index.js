@@ -14,8 +14,8 @@ Page({
     localCodeUrl: '', //绘制的二维码图片本地路径
     localIosCodeUrl: '',//ios绘制的二维码图片本地路径
     saveFilePath: '',
-    codeText: '专属邀请码',
-    inviteCode: '******',
+    codeText: '',
+    // inviteCode: '******',
     selectitem: {},
     systemInfo: {},
     posterName: '',
@@ -382,32 +382,23 @@ Page({
         bg.onload = () => {
           ctx.drawImage(bg, 0, 0, 366, 651)
         }
-        // 绘制 底部 盒子
-        // ctx.fillStyle = '#f0f0f0'
-        // ctx.fillRect(0, 400, 500, 100)
-        // ctx.fill()
-        // 设置 字体
-        // ctx.fillStyle = '#000'
-        // ctx.font = "16px 楷体"
-        // ctx.fillText('11111111111hhhhh', 12, 12)
-        // ctx.fill()
         ctx.restore()
         ctx.save()
         setTimeout(() => {
           ctx.font = "16px";
           ctx.fillStyle = '#FF470D';
-          // this.data.codeText = `${token}专属邀请码`
-          ctx.fillText(this.data.codeText, (bg.width / 2 - ctx.measureText(this.data.codeText).width) / 2, 70)
-          ctx.fillText(this.data.inviteCode, 153, 95);
+          that.data.codeText = `${that.data.posterName}专属邀请码`;
+          ctx.fillText(that.data.codeText, (bg.width / 2 - ctx.measureText(that.data.codeText).width) / 2, 70);
+          ctx.fillText(that.data.invitationCode, 153, 95);
         }, 100)
         // 生成 二维码
         setTimeout(() => {
           const code = canvas.createImage()
           // code.src = this.data.localCodeUrl
           if (that.data.systemInfo.platform == 'android') {
-            code.src = this.data.localCodeUrl
+            code.src = that.data.localCodeUrl
           } else {
-            code.src = this.data.localIosCodeUrl
+            code.src = that.data.localIosCodeUrl
           }
           code.onload = () => {
             ctx.drawImage(code, 118, 413, 130, 130)
