@@ -14,31 +14,35 @@ Page({
     localCodeUrl: '', //绘制的二维码图片本地路径
     localIosCodeUrl: '',//ios绘制的二维码图片本地路径
     saveFilePath: '',
-    codeText: '小虫科技无线无敌企业专属邀请码',
-    inviteCode: 'Z7838K',
+    codeText: '专属邀请码',
+    inviteCode: '******',
+    selectitem: {},
     systemInfo: {},
-    list: [{
-      name: "小虫科技",
-      isCheck: false
-    }, {
-      name: "大客户名称",
-      isCheck: true
-    }, {
-      name: "大客户名称",
-      isCheck: false
-    }, {
-      name: "大客户名称",
-      isCheck: false
-    }, {
-      name: "大客户名称",
-      isCheck: false
-    }, {
-      name: "大客户名称",
-      isCheck: false
-    }, {
-      name: "大客户名称",
-      isCheck: false
-    }]
+    posterName: '',
+    invitationCode: '',
+    list: []
+    // list: [{
+    //   name: "小虫科技",
+    //   isCheck: false
+    // }, {
+    //   name: "大客户名称",
+    //   isCheck: true
+    // }, {
+    //   name: "大客户名称",
+    //   isCheck: false
+    // }, {
+    //   name: "大客户名称",
+    //   isCheck: false
+    // }, {
+    //   name: "大客户名称",
+    //   isCheck: false
+    // }, {
+    //   name: "大客户名称",
+    //   isCheck: false
+    // }, {
+    //   name: "大客户名称",
+    //   isCheck: false
+    // }]
   },
 
   /**
@@ -223,13 +227,18 @@ Page({
   },
   //查询渠道商所有邀请码
   getInviteCodes() {
+    let that = this;
     let channelAgentId = wx.getStorageSync('channelAgentId');
     console.log(channelAgentId)
     let param = {};
     param.channelAgentId = channelAgentId;
     console.log(param);
     http.get(Url.share.queryInviteCode, param).then(res => {
-      console.log(res)
+      that.setData({ //二维码
+        list: res,
+        posterName: res[0].organizationName,
+        invitationCode: res[0].invitationCode
+      })
     }).catch(err => {
       console.log(err)
     })
@@ -282,12 +291,17 @@ Page({
       })
     }.bind(this), 200)
   },
+  //选择大客户
   selectItem(e) {
     console.log(e.currentTarget.dataset.index)
     let datas = this.data.list;
+    console.log(datas)
     for (var i = 0; i < datas.length; i++) {
       if (i == e.currentTarget.dataset.index) {
         datas[i].isCheck = true;
+        this.setData({
+          selectitem: datas[i]
+        })
       } else {
         datas[i].isCheck = false;
       }
@@ -295,6 +309,15 @@ Page({
         list: datas
       })
     }
+  },
+  //选择大客户-确定按钮
+  selectBtn() {
+    let that = this;
+    that.setData({
+      posterName: that.data.selectitem.organizationName,
+      invitationCode: that.data.selectitem.invitationCode
+    });
+    that.hideModal();
   },
   //保存海报
   savePoster() {
@@ -370,6 +393,7 @@ Page({
         setTimeout(() => {
           ctx.font = "16px";
           ctx.fillStyle = '#FF470D';
+          // this.data.codeText = `${token}专属邀请码`
           ctx.fillText(this.data.codeText, (bg.width / 2 - ctx.measureText(this.data.codeText).width) / 2, 70)
           ctx.fillText(this.data.inviteCode, 153, 95);
         }, 100)
