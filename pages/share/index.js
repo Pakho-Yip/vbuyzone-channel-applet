@@ -388,9 +388,9 @@ Page({
         setTimeout(() => {
           ctx.font = "16px";
           ctx.fillStyle = '#FF470D';
-          that.data.codeText = `${that.data.posterName}专属邀请码`;
+          that.data.codeText = `${that.data.posterName ? that.data.posterName : ''}专属邀请码`;
           ctx.fillText(that.data.codeText, (bg.width / 2 - ctx.measureText(that.data.codeText).width) / 2, 70);
-          ctx.fillText(that.data.invitationCode, 153, 95);
+          ctx.fillText(that.data.invitationCode, (bg.width / 2 - ctx.measureText(that.data.invitationCode).width) / 2, 95);
         }, 100)
         // 生成 二维码
         setTimeout(() => {
