@@ -404,6 +404,12 @@ Page({
       posterName: that.data.selectitem.organizationAliasName,
       invitationCode: that.data.selectitem.invitationCode
     });
+    if (that.data.systemInfo.platform == 'android') {
+      that.getQrcode();
+    } else {
+      that.getQrcode();
+      that.getIosQrcode();
+    }
     that.hideModal();
   },
   //保存海报
