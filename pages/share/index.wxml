@@ -30,11 +30,11 @@
       <image class="shareBg" src="../../assets/images/share/bg_share_poster_bg.png" mode="widthFix" lazy-load></image>
     </view>
     <view class="share-group fb-row-center">
-      <view class="share-item-first fb-row-center item-flex-1">
+      <!-- <view class="share-item-first fb-row-center item-flex-1">
         <image class="shareImg" src="../../assets/images/share/icon_share_share.png" mode="widthFix" lazy-load></image>
         <text class="share-text">分享好友</text>
-      </view>
-      <view class="share-item fb-row-center item-flex-1">
+      </view> -->
+      <view class="share-item-first fb-row-center item-flex-1">
         <image class="shareImg" src="../../assets/images/share/icon_share_save.png" mode="widthFix" lazy-load></image>
         <text class="share-text" bindtap="savePoster">保存图片</text>
       </view>
