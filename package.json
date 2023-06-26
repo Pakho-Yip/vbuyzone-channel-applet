@@ -1,7 +1,7 @@
 {
-  "name": "tcsc-driver-applet",
+  "name": "fenhuijie_channel_agent_applet",
   "version": "1.0.0",
-  "description": "司机微信小程序",
+  "description": "粉惠街渠道商微信小程序",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

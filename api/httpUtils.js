@@ -35,8 +35,9 @@ function httpGet(url, data) {
     wx.request({
       header: {
         'Content-Type': 'application/json',
-        'token': tokenId,
-        "TerminalModule": "DRIVER_APPLET"
+        'tcsc-aiotms': tokenId,
+        "TerminalModule": "FENHUIJIE_CHANNEL_AGENT_APPLET",
+        'Cookie': `tcsc-aiotms=${wx.getStorageSync("tokenId")}` //读取本地保存好的上⼀次cookie
       },
       url,
       method: 'GET',
@@ -105,7 +106,7 @@ function httpPost(url, data, showLoading, showError = true) {
       header: {
         'content-Type': 'application/json',
         "token": tokenId,
-        "TerminalModule": "DRIVER_APPLET"
+        "TerminalModule": "FENHUIJIE_CHANNEL_AGENT_APPLET"
       },
       url,
       method: 'POST',

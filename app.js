@@ -11,7 +11,7 @@ App({
       that.globalData.jscode = code;
       // let param = {};
       // param.jsCode = code;
-      // param.termodule = 'DRIVER_APPLET';
+      // param.termodule = 'FENHUIJIE_CHANNEL_AGENT_APPLET';
       // let loginUrl = config[that.globalData.env].apiHost + '/app/login/driver/applets/login'; 
       // http.post(loginUrl, param).then(res => {
       //   if (res.token) {
