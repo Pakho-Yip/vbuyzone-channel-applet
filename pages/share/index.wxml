@@ -2,16 +2,16 @@
 <view>
   <view class="page">
     <view class="top-title">
-      {{posterName}}专属邀请海报
+      {{posterName?posterName:''}}专属邀请海报
       <image bindtap="selectCode" class="downImg" src="../../assets/images/share/icon_down_nor.png" mode="widthFix"
         lazy-load></image>
     </view>
     <view class="share-pic">
       <view class="org-name">
-        {{posterName}}专属邀请码
+        {{posterName?posterName:''}}专属邀请码
       </view>
       <view class="org-code">
-        {{invitationCode}}
+        {{invitationCode?invitationCode:'******'}}
       </view>
       <view class="qrcode">
         <!-- 安卓 -->
@@ -68,10 +68,6 @@
         确定
       </view>
     </view>
-    <!-- <canvas canvas-id='share' style='width:100vw;height:100vh;'></canvas> -->
-
-
-
   </view>
   <view style='width:0px;height:0px;overflow:hidden;'>
     <canvas id="myCanvas" type="2d" style="border: 1px solid;width:366px;height:651px;z-index: 9999;" />

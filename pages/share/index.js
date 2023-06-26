@@ -245,8 +245,11 @@ Page({
   },
   //点击出现底部弹窗
   selectCode() {
-    this.showModal();
-    wx.hideTabBar();
+    let that = this;
+    if (that.data.list && that.data.list != 0) {
+      that.showModal();
+      wx.hideTabBar();
+    }
   },
   //显示对话框
   showModal: function () {
@@ -474,15 +477,28 @@ Page({
   },
   copyBtn() {
     let that = this;
-    wx.setClipboardData({//复制文本
-      data: that.data.inviteCode,
-      success: function (res) {
-        wx.showToast({
-          title: '复制成功',
-          icon: "none",
-          mask: "true"//是否设置点击蒙版，防止点击穿透
-        })
-      }
-    })
+    if (that.data.invitationCode) {
+      wx.setClipboardData({//复制文本
+        data: that.data.invitationCode,
+        success: function (res) {
+          wx.showToast({
+            title: '复制成功',
+            icon: "none",
+            mask: "true"//是否设置点击蒙版，防止点击穿透
+          })
+        }
+      })
+    } else {
+      wx.setClipboardData({//复制文本
+        data: '',
+        success: function (res) {
+          wx.showToast({
+            title: '复制失败',
+            icon: "none",
+            mask: "true"//是否设置点击蒙版，防止点击穿透
+          })
+        }
+      })
+    }
   }
 })
