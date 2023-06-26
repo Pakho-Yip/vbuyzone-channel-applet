@@ -168,9 +168,9 @@ Page({
             that.setData({ //二维码
               localCodeUrl: res.tempFilePath,
             })
-            if (that.data.systemInfo.platform == 'android') {
-              that.generatePoster();
-            }
+            // if (that.data.systemInfo.platform == 'android') {
+            //   that.generatePoster();
+            // }
           },
           fail(res) {
             console.error(res)
@@ -217,7 +217,7 @@ Page({
             that.setData({ //二维码
               localIosCodeUrl: res.tempFilePath,
             })
-            that.generatePoster();
+            // that.generatePoster();
           },
           fail(res) {
             console.error(res)
@@ -236,7 +236,7 @@ Page({
     http.get(Url.share.queryInviteCode, param).then(res => {
       that.setData({ //二维码
         list: res,
-        posterName: res[0].organizationName,
+        posterName: res[0].organizationAliasName,
         invitationCode: res[0].invitationCode
       })
     }).catch(err => {
@@ -317,7 +317,7 @@ Page({
   selectBtn() {
     let that = this;
     that.setData({
-      posterName: that.data.selectitem.organizationName,
+      posterName: that.data.selectitem.organizationAliasName,
       invitationCode: that.data.selectitem.invitationCode
     });
     that.hideModal();
@@ -327,6 +327,7 @@ Page({
     wx.showLoading({
       title: '保存中',
     })
+    this.generatePoster();
     setTimeout(() => {
       wx.canvasToTempFilePath({
         canvas: this.data.canvas, // canvas 实例
