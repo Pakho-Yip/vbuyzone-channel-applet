@@ -12,9 +12,11 @@ Page({
     showModalStatus: false,
     sharelink: "https://www.fenhuijie.com/vbuyzone-fenhuijie-web/appDow.html",
     localCodeUrl: '', //绘制的二维码图片本地路径
+    localIosCodeUrl: '',//ios绘制的二维码图片本地路径
     saveFilePath: '',
     codeText: '小虫科技无线无敌企业专属邀请码',
     inviteCode: 'Z7838K',
+    systemInfo: {},
     list: [{
       name: "小虫科技",
       isCheck: false
@@ -42,10 +44,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    this.getQrcode();
-    this.getInviteCodes();
-    // this.getImginfo(this.data.sharelink, 1)
+  onLoad: function () {
   },
 
   /**
@@ -58,79 +57,40 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  // onShow: function () {
-  //   let that = this;
-  // if (!wx.getStorageSync('tokenId')) {
-  //   that.setData({
-  //     loginStatus: false
-  //   })
-  //   wx.navigateTo({
-  //     url: '../login/index'
-  //   })
-  //   return;
-  // }
-  // this.setData({
-  //   loginStatus: true
-  // })
-  // },
-
-
-  // onShow() {
-  //   wx.createSelectorQuery()
-  //     .select('#myCanvas') // 在 WXML 中填入的 id
-  //     .fields({ node: true, size: true })
-  //     .exec((res) => {
-  //       console.log(res)
-  //       // Canvas 对象
-  //       const canvas = res[0].node
-  //       // 渲染上下文
-  //       const ctx = canvas.getContext('2d')
-
-  //       // Canvas 画布的实际绘制宽高
-  //       const width = res[0].width
-  //       const height = res[0].height
-
-  //       // 初始化画布大小
-  //       const dpr = wx.getWindowInfo().pixelRatio
-  //       canvas.width = width * dpr
-  //       canvas.height = height * dpr
-  //       ctx.scale(dpr, dpr)
-
-  //       new Promise(() => {
-  //         const bg = canvas.createImage()
-  //         bg.src = '../../assets/images/share/bg_share_poster_bg.png'
-  //         bg.onload = () => {
-  //           ctx.drawImage(bg, 0, 0, 366, 651)
-  //         }
-
-  //       }).then(() => {
-
-  //       })
-
-  //       setTimeout(() => {
-  //         ctx.font = "16px";
-  //         ctx.fillStyle = '#FF470D';
-  //         ctx.fillText('小虫科技企业专属邀请码', 95, 70);
-  //         ctx.fillText('Z7838K', 153, 95);
-  //       }, 100)
-
-  //       // 生成图片
-  //       wx.canvasToTempFilePath({
-  //         canvas,
-  //         success: res => {
-  //           // 生成的图片临时文件路径
-  //           this.setData({
-  //             tempFilePath: res.tempFilePath
-  //           })
-  //         },
-  //       })
-  //     })
-  // },
-
-
   onShow: function () {
-    this.generatePoster()
+    let that = this;
+    console.log(that.data.systemInfo);
+    console.log(wx.getStorageSync('tokenId'));
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          systemInfo: res
+        });
+      }
+    });
+    if (!wx.getStorageSync('tokenId')) {
+      that.setData({
+        loginStatus: false
+      })
+      wx.navigateTo({
+        url: '../login/index'
+      })
+      return;
+    } else {
+      if (that.data.systemInfo.platform == 'android') {
+        that.getQrcode();
+      } else {
+        that.getQrcode();
+        that.getIosQrcode();
+      }
+      that.getInviteCodes();
+      that.setData({
+        loginStatus: true
+      })
+    }
   },
+
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -166,7 +126,7 @@ Page({
 
   },
 
-  //生成二维码
+  //生成二维码-安卓
   getQrcode() {
     const query = wx.createSelectorQuery()
     query.select('#myQrcode')
@@ -204,6 +164,56 @@ Page({
             that.setData({ //二维码
               localCodeUrl: res.tempFilePath,
             })
+            if (that.data.systemInfo.platform == 'android') {
+              that.generatePoster();
+            }
+          },
+          fail(res) {
+            console.error(res)
+          }
+        })
+      })
+  },
+  //生成二维码-ios
+  getIosQrcode() {
+    console.log("myIosQrcode");
+    const query = wx.createSelectorQuery()
+    query.select('#myIosQrcode')
+      .fields({
+        node: true,
+        size: true
+      })
+      .exec((res) => {
+        var canvas = res[0].node
+
+        // 调用方法drawQrcode生成二维码
+        drawQrcode({
+          canvas: canvas,
+          canvasId: 'myIosQrcode',
+          // width: 130,
+          // padding: 0,
+          background: '#ffffff',
+          foreground: '#000000',
+          text: this.data.sharelink,
+        })
+
+        // 获取临时路径
+        let that = this;
+        wx.canvasToTempFilePath({
+          canvasId: 'myIosQrcode',
+          canvas: canvas,
+          x: 0,
+          y: 0,
+          width: 130,
+          height: 130,
+          destWidth: 130,
+          destHeight: 130,
+          success(res) {
+            console.log('二维码临时路径：', res.tempFilePath)
+            that.setData({ //二维码
+              localIosCodeUrl: res.tempFilePath,
+            })
+            that.generatePoster();
           },
           fail(res) {
             console.error(res)
@@ -366,7 +376,12 @@ Page({
         // 生成 二维码
         setTimeout(() => {
           const code = canvas.createImage()
-          code.src = this.data.localCodeUrl
+          // code.src = this.data.localCodeUrl
+          if (that.data.systemInfo.platform == 'android') {
+            code.src = this.data.localCodeUrl
+          } else {
+            code.src = this.data.localIosCodeUrl
+          }
           code.onload = () => {
             ctx.drawImage(code, 118, 413, 130, 130)
           }

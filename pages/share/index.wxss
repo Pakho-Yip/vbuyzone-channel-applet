@@ -65,7 +65,7 @@
 .share-group {
   position: fixed;
   bottom: 32rpx;
-  z-index: 2;
+  z-index: 99999;
   left: 50%;
   transform: translateX(-50%);
   width: 658rpx;
