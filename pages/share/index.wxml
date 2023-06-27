@@ -1,8 +1,9 @@
 <!--pages/share/index.wxml-->
+<wxs module="filter" src="../../utils/filter.wxs" />
 <view>
   <view class="page">
     <view class="top-title">
-      {{posterName?posterName:''}}专属邀请海报
+      {{filter.fmtEllipsisText(posterName)}}{{filter.fmtOrganizationType(organizationType)}}专属邀请海报
       <image bindtap="selectCode" class="downImg" src="../../assets/images/share/icon_down_nor.png" mode="widthFix"
         lazy-load></image>
     </view>

@@ -20,6 +20,7 @@ Page({
     systemInfo: {},
     posterName: '',
     invitationCode: '',
+    organizationType: '',
     list: []
     // list: [{
     //   name: "小虫科技",
@@ -315,7 +316,8 @@ Page({
       that.setData({ //二维码
         list: res,
         posterName: res[0].organizationAliasName,
-        invitationCode: res[0].invitationCode
+        invitationCode: res[0].invitationCode,
+        organizationType: res[0].organizationType
       })
       if (that.data.systemInfo.platform == 'android') {
         that.getQrcode();
@@ -402,7 +404,8 @@ Page({
     let that = this;
     that.setData({
       posterName: that.data.selectitem.organizationAliasName,
-      invitationCode: that.data.selectitem.invitationCode
+      invitationCode: that.data.selectitem.invitationCode,
+      organizationType: that.data.selectitem.organizationType
     });
     if (that.data.systemInfo.platform == 'android') {
       that.getQrcode();

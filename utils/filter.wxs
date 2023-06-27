@@ -1,0 +1,28 @@
+
+// 使用var定义一个json开头 将所有的过滤器写在unit中
+var fmtOrganizationType = function (value) {
+  var organizationType = [
+    { text: "企业", value: "ENTERPRISE" },
+    { text: "社区", value: "COMMUNITY" },
+    { text: "校园", value: "SCHOOL" }
+  ];
+  for (var i = 0; i < organizationType.length; i++) {
+    if (organizationType[i].value == value) {
+      return organizationType[i].text;
+    }
+  }
+  return value
+}
+var fmtEllipsisText = function (value) {
+  if (!value) return "";
+  return value.length > 6
+    ? value.substring(0, 6) + "..."
+    : value;
+}
+
+// 导出过滤器 这段代码必写
+module.exports = {
+  // 格式为 导出的名字: json名字.函数名字 
+  fmtOrganizationType: fmtOrganizationType,
+  fmtEllipsisText: fmtEllipsisText
+}
