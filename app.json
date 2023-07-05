@@ -6,7 +6,8 @@
     "pages/fans/index",
     "pages/income/index",
     "pages/login/index",
-    "pages/agreement/index"
+    "pages/agreement/serviceAgreement/index",
+    "pages/agreement/privacyPolicy/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

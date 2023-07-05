@@ -1,4 +1,0 @@
-<!--pages/agreement/index.wxml-->
-<view>
-  <view>{{content}}</view>
-</view>

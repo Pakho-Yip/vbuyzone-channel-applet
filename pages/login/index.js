@@ -256,5 +256,15 @@ Page({
       })
       wxReLaunch("../my/index")
     })
+  },
+  toService() {
+    wx.navigateTo({
+      url: '../agreement/serviceAgreement/index',
+    })
+  },
+  toPrivacy() {
+    wx.navigateTo({
+      url: '../agreement/privacyPolicy/index',
+    })
   }
 })
