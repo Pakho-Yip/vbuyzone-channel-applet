@@ -9,7 +9,8 @@ export default {
   login: {
     login: apiHost + "/applet/wechat/login", // 微信授权登录
     out: apiHost + "/applet/wechat/signOut", // 登出
-    channelAgentApply: apiHost + "/applet/channelAgent/apply" // 提交渠道商申请
+    channelAgentApply: apiHost + "/applet/channelAgent/apply", // 提交渠道商申请
+    agreement: apiHost + "/configuration/query/contents" // 获取协议
   },
   share: {
     queryInviteCode: apiHost + "/inviteCode/queryInviteCodesByChannelAgent" // 查询渠道商所有邀请码

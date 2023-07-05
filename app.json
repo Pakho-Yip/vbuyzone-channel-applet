@@ -5,14 +5,15 @@
     "pages/share/index",
     "pages/fans/index",
     "pages/income/index",
-    "pages/login/index"
+    "pages/login/index",
+    "pages/agreement/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "粉惠街",
     "navigationBarTextStyle": "black",
-    "navigationStyle":"default"
+    "navigationStyle": "default"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
