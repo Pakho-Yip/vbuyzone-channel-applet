@@ -283,9 +283,11 @@ li,
 .w-160 {
   width: 160rpx;
 }
+
 .w-340 {
   width: 340rpx;
 }
+
 .w-554 {
   width: 554rpx;
 }
@@ -566,6 +568,10 @@ li,
 
 .text-right {
   text-align: right;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .text-bold {

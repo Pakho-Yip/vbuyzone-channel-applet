@@ -75,9 +75,12 @@ export function wxReLaunch(url) {
     wx.reLaunch({
       url,
       success: function (res) {
+        console.log(res)
         resolve(res)
       },
       fail: function (err) {
+        console.log(err)
+
         reject(err)
       }
     })

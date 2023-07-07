@@ -99,7 +99,7 @@ Page({
     if (!this.data.radioFlag) {
       wx.showToast({
         icon: "none",
-        title: '请阅读并同意平台服务协议及隐私协议',
+        title: '请阅读并同意用户注册服务协议及隐私协议',
         duration: 2000
       })
       return false

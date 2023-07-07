@@ -34,7 +34,7 @@
               <radio class="radio-nocheck" checked="{{radioFlag}}" color='#FF5473' />
             </label>
             已阅读并同意
-            <text class="agreement-text" bindtap="toService">《粉惠街服务协议》
+            <text class="agreement-text" bindtap="toService">《粉惠街用户注册服务协议》
             </text>和
             <text class='agreement-text' bindtap="toPrivacy">《隐私政策》</text>
           </view>

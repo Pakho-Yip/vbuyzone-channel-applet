@@ -1,10 +1,12 @@
 <!--pages/my/index.wxml-->
 <view class="page">
-  <image class="headtop" style="width: 750rpx;height: 92rpx;" src="../../assets/images/my/bg_personal_bg.png" mode="widthFix" lazy-load></image>
+  <image class="headtop" style="width: 750rpx;height: 92rpx;" src="../../assets/images/my/bg_personal_bg.png"
+    mode="widthFix" lazy-load></image>
   <view class="headtop-info fb-row-center" style="justify-content: flex-start;">
-    <open-data style="margin-left: 23rpx;" class="bd-radio-50 absolute w-115 h-115 headImg" type="userAvatarUrl"></open-data>
-    <!-- <button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> -->
-    <!-- <image class="absolute head-bgc" src="../../assets/images/headwrap.png"></image> -->
+    <open-data style="margin-left: 23rpx;" class="bd-radio-50 absolute w-115 h-115 headImg" type="userAvatarUrl">
+    </open-data>
+    <!-- <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <image class="absolute head-bgc" src="../../assets/images/headwrap.png"></image> -->
 
     <view style="margin-left: 166rpx;" bindtap="handleLogin" wx:if="{{!loginStatus}}">
       <view class="font-32 c-FFFFFF fw-500">
@@ -16,7 +18,8 @@
         <open-data class="" type="userNickName"></open-data>
       </view>
     </view>
-    <view class="ml-32 mt-18 bd-radio-12 w-160 h-44 fb fb-main-center fb-cross-center bd-FFAFAF" wx:if="{{loginStatus}}">
+    <view class="ml-32 mt-18 bd-radio-12 w-160 h-44 fb fb-main-center fb-cross-center bd-FFAFAF"
+      wx:if="{{loginStatus}}">
       <view class="font-24 ml-4 fb c-FFFFFF" bindtap="handleOut">
         退出登录
       </view>
