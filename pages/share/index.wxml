@@ -4,8 +4,7 @@
   <view class="page">
     <view class="top-title">
       {{filter.fmtEllipsisText(posterName)}}{{filter.fmtOrganizationType(organizationType)}}专属邀请海报
-      <image bindtap="selectCode" class="downImg" src="../../assets/images/share/icon_down_nor.png" mode="widthFix"
-        lazy-load></image>
+      <image bindtap="selectCode" class="downImg" src="../../assets/images/share/icon_down_nor.png" mode="widthFix" lazy-load></image>
     </view>
     <view class="share-pic">
       <view class="org-name">
@@ -16,17 +15,14 @@
       </view>
       <view class="qrcode">
         <!-- 安卓 -->
-        <canvas wx:if="{{systemInfo.platform == 'android'}}" type="2d"
-          style="width: 130px; height: 130px;z-index: 999;margin-top: 794rpx;" id="myQrcode"></canvas>
+        <!-- <canvas wx:if="{{systemInfo.platform == 'android'}}" type="2d"
+          style="width: 130px; height: 130px;z-index: 999;margin-top: 794rpx;" id="myQrcode"></canvas> -->
+        <canvas wx:if="{{systemInfo.platform == 'android'}}" type="2d" style="width: 250rpx; height: 250rpx;z-index: 999;margin-top: 794rpx;" id="myQrcode"></canvas>
         <!-- windows -->
-        <canvas wx:if="{{systemInfo.platform == 'devtools'}}" type="2d"
-          style="width: 130px; height: 130px;z-index: 999;margin-top: 794rpx;" id="myQrcode"></canvas>
+        <canvas wx:if="{{systemInfo.platform == 'devtools'}}" type="2d" style="width: 130px; height: 130px;z-index: 999;margin-top: 794rpx;" id="myQrcode"></canvas>
         <!-- ios -->
-        <canvas wx:if="{{systemInfo.platform == 'ios'}}" type="2d"
-          style="width: 250rpx; height: 250rpx;z-index: 999;margin-top: 794rpx;" id="myQrcode"></canvas>
-        <canvas hidden="{{false}}" type="2d"
-          style="width: 130px; height: 130px;z-index: 999;margin-top: 794rpx;position:fixed;left:100%;"
-          id="myIosQrcode"></canvas>
+        <canvas wx:if="{{systemInfo.platform == 'ios'}}" type="2d" style="width: 250rpx; height: 250rpx;z-index: 999;margin-top: 794rpx;" id="myQrcode"></canvas>
+        <canvas hidden="{{false}}" type="2d" style="width: 130px; height: 130px;z-index: 999;margin-top: 794rpx;position:fixed;left:100%;" id="myIosQrcode"></canvas>
       </view>
       <image class="shareBg" src="../../assets/images/share/bg_share_poster_bg.png" mode="widthFix" lazy-load></image>
     </view>
@@ -53,15 +49,12 @@
         请选择
       </view>
       <view class="pop-list">
-        <view class="fb-row-center pop-item {{item.isCheck == true ? 'check-bg' : ''}}"
-          style="justify-content: space-between;" wx:for="{{list}}" wx:key="index" wx:for-item="item"
-          data-index="{{index}}" bindtap="selectItem">
+        <view class="fb-row-center pop-item {{item.isCheck == true ? 'check-bg' : ''}}" style="justify-content: space-between;" wx:for="{{list}}" wx:key="index" wx:for-item="item" data-index="{{index}}" bindtap="selectItem">
           <view class="pop-item-text">
             {{item.organizationName}}
           </view>
           <view wx:if="{{!item.isCheck}}" class="nocheck"></view>
-          <image wx:else class="check" src="../../assets/images/share/login_icon_check_sel.png" mode="widthFix"
-            lazy-load>
+          <image wx:else class="check" src="../../assets/images/share/login_icon_check_sel.png" mode="widthFix" lazy-load>
           </image>
         </view>
       </view>
