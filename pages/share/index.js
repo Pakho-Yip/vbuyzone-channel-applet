@@ -313,12 +313,27 @@ Page({
     param.channelAgentId = channelAgentId;
     console.log(param);
     http.get(Url.share.queryInviteCode, param).then(res => {
-      that.setData({ //二维码
-        list: res,
-        posterName: res[0].organizationAliasName,
-        invitationCode: res[0].invitationCode,
-        organizationType: res[0].organizationType
-      })
+      let organizationAliasName = wx.getStorageSync('organizationAliasName') || '';
+      if (organizationAliasName) {
+        let datas = res;
+        for (var i = 0; i < datas.length; i++) {
+          if (organizationAliasName == datas[i].organizationAliasName) {
+            this.setData({
+              list: res,
+              posterName: datas[i].organizationAliasName,
+              invitationCode: datas[i].invitationCode,
+              organizationType: datas[i].organizationType
+            })
+          }
+        }
+      } else {
+        that.setData({
+          list: res,
+          posterName: res[0].organizationAliasName,
+          invitationCode: res[0].invitationCode,
+          organizationType: res[0].organizationType
+        })
+      }
       if (that.data.systemInfo.platform == 'android') {
         that.getQrcode();
       } else {
@@ -334,6 +349,7 @@ Page({
     let that = this;
     if (that.data.list && that.data.list != 0) {
       that.showModal();
+      that.showItem();
       wx.hideTabBar();
     }
   },
@@ -380,6 +396,24 @@ Page({
       })
     }.bind(this), 200)
   },
+  //回显大客户
+  showItem(e) {
+    let that = this;
+    let datas = that.data.list;
+    for (var i = 0; i < datas.length; i++) {
+      if (that.data.posterName == datas[i].organizationAliasName) {
+        datas[i].isCheck = true;
+        that.setData({
+          selectitem: datas[i]
+        })
+      } else {
+        datas[i].isCheck = false;
+      }
+      that.setData({
+        list: datas
+      })
+    }
+  },
   //选择大客户
   selectItem(e) {
     console.log(e.currentTarget.dataset.index)
@@ -413,6 +447,7 @@ Page({
       that.getQrcode();
       that.getIosQrcode();
     }
+    wx.setStorageSync('organizationAliasName', that.data.selectitem.organizationAliasName);
     that.hideModal();
   },
   //保存海报
