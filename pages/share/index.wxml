@@ -2,9 +2,9 @@
 <wxs module="filter" src="../../utils/filter.wxs" />
 <view>
   <view class="page">
-    <view class="top-title">
+    <view class="top-title" bindtap="selectCode">
       {{filter.fmtEllipsisText(posterName)}}{{filter.fmtOrganizationType(organizationType)}}专属邀请海报
-      <image bindtap="selectCode" class="downImg" src="../../assets/images/share/icon_down_nor.png" mode="widthFix" lazy-load></image>
+      <image class="downImg" src="../../assets/images/share/icon_down_nor.png" mode="widthFix" lazy-load></image>
     </view>
     <view class="share-pic">
       <view class="org-name">
