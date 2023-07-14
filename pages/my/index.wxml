@@ -3,11 +3,11 @@
   <image class="headtop" style="width: 750rpx;height: 92rpx;" src="../../assets/images/my/bg_personal_bg.png"
     mode="widthFix" lazy-load></image>
   <view class="headtop-info fb-row-center" style="justify-content: flex-start;">
-    <open-data style="margin-left: 23rpx;" class="bd-radio-50 absolute w-115 h-115 headImg" type="userAvatarUrl">
-    </open-data>
-    <!-- <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <image class="absolute head-bgc" src="../../assets/images/headwrap.png"></image> -->
-
+    <!-- <open-data style="margin-left: 23rpx;" class="bd-radio-50 absolute w-115 h-115 headImg" type="userAvatarUrl">
+    </open-data> -->
+    <view class="absolute fb-row-center" style="margin-left: 30rpx;">
+      <image class="w-115 h-115 headImg" src="../../assets/images/my/icon_miao.png"></image>
+    </view>
     <view style="margin-left: 166rpx;" bindtap="handleLogin" wx:if="{{!loginStatus}}">
       <view class="font-32 c-FFFFFF fw-500">
         立即登录
@@ -15,26 +15,25 @@
     </view>
     <view style="margin-left: 166rpx;" wx:else>
       <view class="font-32 c-FFFFFF fw-500">
-        <open-data class="" type="userNickName"></open-data>
+        <!-- <open-data class="" type="userNickName"></open-data> -->
+        {{mobile}}
       </view>
     </view>
-    <view class="ml-32 mt-18 bd-radio-12 w-160 h-44 fb fb-main-center fb-cross-center bd-FFAFAF"
-      wx:if="{{loginStatus}}">
+    <view class="ml-32 bd-radio-12 w-160 h-44 fb fb-main-center fb-cross-center bd-FFAFAF" wx:if="{{loginStatus}}">
       <view class="font-24 ml-4 fb c-FFFFFF" bindtap="handleOut">
         退出登录
       </view>
     </view>
   </view>
-
-  <view class="fb-col-center" wx:if="{{!loginStatus}}">
+  <view class="fb-col-center">
     <image class="noLogin" src="../../assets/images/my/icon_login_nomessage.png" mode="widthFix" lazy-load></image>
     <view class="noLogin-text">
       暂时没有获得更多信息
     </view>
-    <view class="noLogin-btn" bindtap="handleLogin">
+    <view class="noLogin-btn" bindtap="handleLogin" wx:if="{{!loginStatus}}">
       立即登录
     </view>
-    <view class="noLogin-tip fb-row-center" style="justify-content: space-between;">
+    <view class="noLogin-tip fb-row-center" style="justify-content: space-between;" wx:if="{{!loginStatus}}">
       <view style="margin-left: 46rpx;">
         登录查看更多信息
       </view>

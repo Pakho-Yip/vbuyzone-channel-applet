@@ -18,14 +18,17 @@ Page({
     haveSignedAgreement: '',
     name: "用户名",
     loginStatus: false,
-    confState: true
+    confState: true,
+    mobile: ''
   },
   onLoad: function (options) {
+    let that = this;
+    if (wx.getStorageSync('linkMobileNumber')) {
+      that.setData({
+        mobile: that.desensitization(wx.getStorageSync('linkMobileNumber'), 3, 7)
+      })
+    }
   },
-
-
-
-
   desensitization(str, beginLen, endLen) {
     var len = str.length;
     var firstStr = str.substr(0, beginLen);
@@ -34,25 +37,25 @@ Page({
     let tempStr = firstStr + middleStr + lastStr;
     return tempStr;
   },
-  refreshData() {
-    http.post(Url.common.refreshData, '').then(res => {
-      if (res) {
-        let driverName = res.driverName || '司机名';
-        let identityAuthState = res.identityAuthState;
-        let truckAuthState = res.truckAuthState;
-        let haveSignedAgreement = res.haveSignedAgreement;
-        wx.setStorageSync('mobile', res.mobile)
-        let showMobile = this.desensitization(res.mobile, 3, 7);
-        this.setData({
-          name: driverName,
-          mobile: showMobile,
-          identityAuthState: identityAuthState,
-          truckAuthState: truckAuthState,
-          haveSignedAgreement: haveSignedAgreement
-        })
-      }
-    })
-  },
+  // refreshData() {
+  //   http.post(Url.common.refreshData, '').then(res => {
+  //     if (res) {
+  //       let driverName = res.driverName || '司机名';
+  //       let identityAuthState = res.identityAuthState;
+  //       let truckAuthState = res.truckAuthState;
+  //       let haveSignedAgreement = res.haveSignedAgreement;
+  //       wx.setStorageSync('mobile', res.mobile)
+  //       let showMobile = this.desensitization(res.mobile, 3, 7);
+  //       this.setData({
+  //         name: driverName,
+  //         mobile: showMobile,
+  //         identityAuthState: identityAuthState,
+  //         truckAuthState: truckAuthState,
+  //         haveSignedAgreement: haveSignedAgreement
+  //       })
+  //     }
+  //   })
+  // },
   handleLogin() {
     wx.navigateTo({
       url: '/pages/login/index',
@@ -159,7 +162,7 @@ Page({
       wx.stopPullDownRefresh();
       return;
     }
-    this.refreshData();
+    // this.refreshData();
     // this.getWxVersion();
   },
   handleOut() {
